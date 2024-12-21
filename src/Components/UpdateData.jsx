@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
 
@@ -26,7 +27,43 @@ const UpdateData = () => {
 
     fetchPosts();
   }, [id]);
-  console.log(posts);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.job_title.value;
+    const email = user?.email;
+    const category = form.category.value;
+    const deadLine = startDate;
+    const description = form.description.value;
+    const location = form.location.value;
+    const photo = form.photo.value;
+
+    const Data = {
+      title,
+      volunteer: {
+        name: user?.displayName,
+        email: user?.email,
+      },
+      category,
+      deadLine,
+      description,
+      location,
+      photo,
+    };
+
+    console.log(Data);
+
+    try {
+      await axios.put(`${import.meta.env.VITE_API_URL}/updatedJob/${id}`, Data);
+      form.reset();
+      toast.success("Data Updated Successfully!");
+      navigate("/myPost");
+    } catch (error) {
+      toast.error("Updated Fails !!!!");
+    }
+  };
+
   return (
     <div className="md:flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <section className="p-2 md:p-6 mx-auto rounded-md shadow-md w-11/12 md:w-8/12 border-2">
@@ -34,15 +71,15 @@ const UpdateData = () => {
           Edit Volunteer Post
         </h2>
 
-        <form>
+        <form onSubmit={handleUpdate}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-gray-700">Post Title</label>
               <input
-                id="post_title"
-                name="post_title"
+                id="job_title"
+                name="job_title"
                 type="text"
-                defaultValue={posts.title}
+                defaultValue={posts?.title}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
@@ -51,7 +88,7 @@ const UpdateData = () => {
               <label className="text-gray-700">Deadline</label>
               <DatePicker
                 selected={startDate}
-                defaultValue={posts.deadLine}
+                onChange={(date) => setStartDate(date)}
                 className="border p-2 rounded-md"
               />
             </div>
@@ -70,7 +107,6 @@ const UpdateData = () => {
               />
             </div>
 
-            {/* Organizer Name */}
             <div>
               <label className="text-gray-700" htmlFor="organizer_name">
                 Organizer Name
@@ -93,9 +129,6 @@ const UpdateData = () => {
                 name="category"
                 id="category"
                 defaultValue={posts?.category}
-                onChange={(e) =>
-                  setPosts({ ...posts, category: e.target.value })
-                }
                 className="border p-2 rounded-md"
               >
                 <option value="" disabled>
@@ -125,14 +158,13 @@ const UpdateData = () => {
             </div>
 
             <div className="col-span-2">
-              <label className="text-gray-700" htmlFor="thumbel">
+              <label className="text-gray-700" htmlFor="photo">
                 Thumbnail
               </label>
               <input
                 type="text"
                 name="photo"
                 defaultValue={posts?.photo}
-                onChange={(e) => setPosts({ ...posts, photo: e.target.value })}
                 placeholder="Enter photo URL"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
@@ -147,10 +179,7 @@ const UpdateData = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               name="description"
               id="description"
-              defaultValue={posts?.description}
-              onChange={(e) =>
-                setPosts({ ...posts, description: e.target.value })
-              }
+              defaultValue={posts?.description || ""}
             ></textarea>
           </div>
 
