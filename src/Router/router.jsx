@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../Components/ErrorPage";
+import UpdateData from "../Components/UpdateData";
 import MainLayout from "../Layout/MainLayout";
 import AddVolunteer from "../Page/AddVolunteer";
 import AllVolunteer from "../Page/AllVouleenter";
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPost></MyPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateData/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateData></UpdateData>
           </PrivateRoute>
         ),
       },

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
 
 const MyPost = () => {
-  const { user } = useContext(AuthContex); // Access authenticated user
+  const { user } = useContext(AuthContex);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const MyPost = () => {
 
   const fetchMyPosts = async () => {
     try {
-      console.log("Fetching posts for:", user?.email); // Debug
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/post/${user?.email}`
       );
@@ -29,11 +28,10 @@ const MyPost = () => {
 
   const handleDelete = async (id) => {
     try {
-      console.log("Attempting to delete post with ID:", id); // Debug
       const response = await axios.delete(
         `${import.meta.env.VITE_API_URL}/post/${id}`
       );
-      console.log("Delete response:", response.data); // Debug
+
       toast.success("Post successfully deleted!");
       setPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
     } catch (error) {
@@ -42,7 +40,8 @@ const MyPost = () => {
         error.response?.data || error.message
       );
       toast.error(
-        "Error deleting post: " + (error.response?.data?.message || error.message)
+        "Error deleting post: " +
+          (error.response?.data?.message || error.message)
       );
     }
   };
@@ -73,7 +72,7 @@ const MyPost = () => {
   };
 
   return (
-    <section className="container px-4 mx-auto py-12">
+    <div className="container px-4 mx-auto py-12">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800">
           My Volunteer Need Posts
@@ -90,7 +89,9 @@ const MyPost = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="py-3.5 px-4 text-sm font-normal text-left">Title</th>
+                    <th className="py-3.5 px-4 text-sm font-normal text-left">
+                      Title
+                    </th>
                     <th className="px-4 py-3.5 text-sm font-normal text-left">
                       Location
                     </th>
@@ -108,21 +109,20 @@ const MyPost = () => {
                       <td className="px-4 py-4 text-sm font-semibold text-gray-800">
                         {post.title}
                       </td>
-                      <td className="px-4 py-4 text-sm">
-                        {post.location}
-                      </td>
+                      <td className="px-4 py-4 text-sm">{post.location}</td>
                       <td className="px-4 py-4 text-sm">
                         {format(new Date(post.deadLine), "P")}
                       </td>
                       <td className="px-4 py-4 text-sm">
                         <div className="flex gap-x-4">
                           <Link
-                            to={`/update-volunteer-post/${post._id}`}
+                            to={`/updateData/${post._id}`}
                             className="flex items-center gap-1 text-blue-500 transition duration-200"
                           >
                             <FaEdit className="w-4 h-4" />
                             Edit
                           </Link>
+
                           <button
                             onClick={() => confirmDelete(post._id)}
                             className="flex items-center gap-1 text-red-500 transition duration-200"
@@ -140,7 +140,7 @@ const MyPost = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

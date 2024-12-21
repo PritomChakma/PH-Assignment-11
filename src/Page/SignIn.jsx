@@ -16,8 +16,8 @@ const Login = () => {
     // Login user
     loginUser(email, password)
       .then((result) => {
-        form.reset(); // Reset form after successful login
-        navigate("/"); // Redirect after login
+        form.reset();
+        navigate("/");
         toast.success("Login successfully");
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        navigate("/"); // Redirect after Google login
+        navigate("/");
         toast.success("Login successfully with Google");
       })
       .catch((error) => {
@@ -37,13 +37,12 @@ const Login = () => {
         console.error("ERROR", error.message);
       });
   };
-
+  console.log(user);
   return (
     <div>
       <div
         className="min-h-screen  flex items-center justify-center"
         style={{
-          // backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
