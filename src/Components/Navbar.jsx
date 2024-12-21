@@ -83,7 +83,7 @@ const Navbar = () => {
                   <Link to="/addVolunteer">Add Volunteer</Link>
                 </li>
                 <li>
-                  <Link to="my"> My Posts </Link>
+                  <Link to="/myPost"> My Posts </Link>
                 </li>
                 <li>
                   {user ? (

@@ -33,7 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/myPost",
-        element: <MyPost></MyPost>,
+        element: (
+          <PrivateRoute>
+            <MyPost></MyPost>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signin",

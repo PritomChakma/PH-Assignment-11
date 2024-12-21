@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const AllVolunteer = () => {
   const [posts, setPosts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const AllVolunteer = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/volunteer-posts?title=${searchQuery}`
+        `${import.meta.env.VITE_API_URL}/volunteer-posts?title=${search}`
       );
       setPosts(response.data);
     } catch (error) {
@@ -41,8 +41,8 @@ const AllVolunteer = () => {
           type="text"
           placeholder="Search by Post Title"
           className="flex-grow px-4 py-2 border border-[#EF4C53] rounded-md focus:outline-none focus:ring-2 focus:ring-[#EF4C53]"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <button
           onClick={handleSearch}
@@ -52,14 +52,13 @@ const AllVolunteer = () => {
         </button>
       </div>
 
-      {/* Posts List */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto">
         {posts.map((post) => (
           <div
             key={post._id}
             className="bg-white p-4 rounded-md shadow-md border hover:shadow-lg"
           >
-            {/* Thumbnail Image */}
             {post.photo && (
               <img
                 src={post.photo}
@@ -70,9 +69,9 @@ const AllVolunteer = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               {post.title}
             </h3>
-            <p className="text-gray-600">Category: {post.category}</p>
-            <p className="text-gray-600">Location: {post.location}</p>
-            <p className="text-gray-600">
+            <p className="">Category: {post.category}</p>
+            <p className="">Location: {post.location}</p>
+            <p className="">
               Deadline: {new Date(post.deadLine).toLocaleDateString()}
             </p>
 
@@ -85,8 +84,6 @@ const AllVolunteer = () => {
           </div>
         ))}
       </div>
-
-      {/* No Posts Found */}
       {posts.length === 0 && (
         <p className="text-center text-gray-500 mt-8">No posts found.</p>
       )}
