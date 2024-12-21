@@ -40,7 +40,9 @@ const Navbar = () => {
     <div>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">Volunteer</Link>
+          <Link to="/" className="btn btn-ghost text-xl">
+            Volunteer
+          </Link>
         </div>
         <div className="flex-none md:gap-3 items-center">
           <div className="flex gap-3">
@@ -58,6 +60,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full ">
                 {user ? (
                   <img
+                    referrerPolicy="no-referrer"
                     src={
                       user?.photoURL ||
                       "https://www.example.com/default-avatar.jpg"
