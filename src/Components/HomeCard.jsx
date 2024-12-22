@@ -63,7 +63,7 @@ const VolunteerNeedsNow = () => {
               })}
             </p>
             <button
-              onClick={() => navigate(`/volunteer-post-details/${post._id}`)}
+              onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
             >
               View Details
@@ -71,10 +71,6 @@ const VolunteerNeedsNow = () => {
           </div>
         ))}
       </div>
-
-      <p className="text-center text-gray-500 mt-8">
-        No upcoming volunteer opportunities found.
-      </p>
     </div>
   );
 };

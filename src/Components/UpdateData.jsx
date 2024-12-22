@@ -60,19 +60,19 @@ const UpdateData = () => {
       toast.success("Data Updated Successfully!");
       navigate("/myPost");
     } catch (error) {
-      toast.error("Updated Fails !!!!");
+      toast.error("Update Failed!");
     }
   };
 
   return (
-    <div className="md:flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
-      <section className="p-2 md:p-6 mx-auto rounded-md shadow-md w-11/12 md:w-8/12 border-2">
+    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] sm:my-6">
+      <section className="p-4 sm:p-6 mx-auto rounded-md shadow-md w-11/12 md:w-8/12 border-2">
         <h2 className="text-lg font-semibold text-gray-700 capitalize text-center mb-5">
           Edit Volunteer Post
         </h2>
 
         <form onSubmit={handleUpdate}>
-          <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-gray-700">Post Title</label>
               <input
@@ -88,8 +88,8 @@ const UpdateData = () => {
               <label className="text-gray-700">Deadline</label>
               <DatePicker
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                className="border p-2 rounded-md"
+                // onChange={(date) => setStartDate(date)}
+                className="block w-full border p-2 rounded-md"
               />
             </div>
 
@@ -129,7 +129,7 @@ const UpdateData = () => {
                 name="category"
                 id="category"
                 defaultValue={posts?.category}
-                className="border p-2 rounded-md"
+                className="block w-full border p-2 rounded-md"
               >
                 <option value="" disabled>
                   Select a Category
@@ -150,15 +150,15 @@ const UpdateData = () => {
                 name="location"
                 type="text"
                 defaultValue={posts?.location}
-                onChange={(e) =>
-                  setPosts({ ...posts, location: e.target.value })
-                }
+                // onChange={(e) =>
+                //   setPosts({ ...posts, location: e.target.value })
+                // }
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
 
             <div className="col-span-2">
-              <label className="text-gray-700" htmlFor="photo">
+              <label className="text-gray-700">
                 Thumbnail
               </label>
               <input
@@ -172,21 +172,21 @@ const UpdateData = () => {
           </div>
 
           <div className="flex flex-col gap-2 mt-4">
-            <label className="text-gray-700" htmlFor="description">
+            <label className="text-gray-700">
               Description
             </label>
             <textarea
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               name="description"
               id="description"
-              defaultValue={posts?.description || ""}
+              defaultValue={posts?.description}
             ></textarea>
           </div>
 
           <div className="flex justify-end mt-6">
             <button
               type="submit"
-              className="w-full btn bg-[#EF4C53] text-white font-bold"
+              className="block w-full btn bg-[#EF4C53] text-white font-bold"
             >
               Update
             </button>

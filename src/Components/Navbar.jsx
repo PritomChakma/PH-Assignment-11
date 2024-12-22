@@ -90,7 +90,7 @@ const Navbar = () => {
                     <NavLink
                       to="/signin"
                       onClick={handleSignOut}
-                      className="btn btn-sm btn-error"
+                      className="btn btn-sm btn-error text-white"
                     >
                       Log Out
                     </NavLink>

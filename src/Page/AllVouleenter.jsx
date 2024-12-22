@@ -52,7 +52,6 @@ const AllVolunteer = () => {
         </button>
       </div>
 
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto">
         {posts.map((post) => (
           <div
@@ -76,7 +75,7 @@ const AllVolunteer = () => {
             </p>
 
             <button
-              onClick={() => navigate(`/volunteer-post-details/${post._id}`)}
+              onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
             >
               View Details

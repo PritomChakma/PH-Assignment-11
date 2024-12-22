@@ -39,10 +39,7 @@ const MyPost = () => {
         "Error deleting post:",
         error.response?.data || error.message
       );
-      toast.error(
-        "Error deleting post: " +
-          (error.response?.data?.message || error.message)
-      );
+      toast.error(error.message);
     }
   };
 
@@ -73,16 +70,7 @@ const MyPost = () => {
 
   return (
     <div className="container px-4 mx-auto py-12">
-      <div className="flex items-center gap-x-3">
-        <h2 className="text-lg font-medium text-gray-800">
-          My Volunteer Need Posts
-        </h2>
-        <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-          {posts.length} Post{posts.length !== 1 ? "s" : ""}
-        </span>
-      </div>
-
-      <div className="flex flex-col mt-6">
+      <div className="flex flex-col ">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden border border-gray-200 md:rounded-lg">

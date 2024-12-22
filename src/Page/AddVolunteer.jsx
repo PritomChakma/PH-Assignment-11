@@ -48,16 +48,16 @@ const AddVolunteer = () => {
   };
 
   return (
-    <div className="md:flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
-      <section className="p-2 md:p-6 mx-auto  rounded-md shadow-md w-11/12 md:w-8/12 border-2">
+    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12 px-4">
+      <section className="p-4 md:p-6 mx-auto rounded-md shadow-md w-full sm:w-11/12 md:w-8/12 border-2">
         <h2 className="text-lg font-semibold text-gray-700 capitalize text-center mb-5">
           Add Volunteer Post
         </h2>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
             <div>
-              <label className="text-gray-700" htmlFor="job_title">
+              <label className="text-gray-700">
                 Post Title
               </label>
               <input
@@ -71,7 +71,7 @@ const AddVolunteer = () => {
             <div className="flex flex-col gap-2">
               <label className="text-gray-700">Deadline</label>
               <DatePicker
-                className="border p-2 rounded-md"
+                className="border p-2 rounded-md w-full"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
               />
@@ -92,14 +92,14 @@ const AddVolunteer = () => {
             </div>
 
             <div>
-              <label className="text-gray-700" htmlFor="organizer_name">
+              <label className="text-gray-700">
                 Organizer Name
               </label>
               <input
                 id="organizer_name"
                 type="text"
                 name="organizer_name"
-                value={user?.displayName || ""}
+                value={user?.displayName}
                 readOnly
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border border-gray-200 rounded-md focus:outline-none"
               />
@@ -112,7 +112,7 @@ const AddVolunteer = () => {
               <select
                 name="category"
                 id="category"
-                className="border p-2 rounded-md"
+                className="border p-2 rounded-md w-full"
               >
                 <option value="healthcare">Healthcare</option>
                 <option value="education">Education</option>
@@ -133,7 +133,7 @@ const AddVolunteer = () => {
               />
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <label className="text-gray-700" htmlFor="thumbel">
                 Thumbnail
               </label>
