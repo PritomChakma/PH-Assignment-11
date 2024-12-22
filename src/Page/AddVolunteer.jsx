@@ -21,6 +21,7 @@ const AddVolunteer = () => {
     const description = form.description.value;
     const location = form.location.value;
     const photo = form.photo.value;
+    const noofvolunteer = form.noofvolunteer.value;
 
     const Data = {
       title,
@@ -33,6 +34,7 @@ const AddVolunteer = () => {
       description,
       location,
       photo,
+      noofvolunteer,
     };
 
     console.log(Data);
@@ -57,9 +59,7 @@ const AddVolunteer = () => {
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4">
             <div>
-              <label className="text-gray-700">
-                Post Title
-              </label>
+              <label className="text-gray-700">Post Title</label>
               <input
                 id="job_title"
                 name="job_title"
@@ -85,16 +85,14 @@ const AddVolunteer = () => {
                 id="emailAddress"
                 type="email"
                 name="email"
-                value={user?.email || ""}
+                value={user?.email}
                 readOnly
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border border-gray-200 rounded-md focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="text-gray-700">
-                Organizer Name
-              </label>
+              <label className="text-gray-700">Organizer Name</label>
               <input
                 id="organizer_name"
                 type="text"
@@ -133,7 +131,7 @@ const AddVolunteer = () => {
               />
             </div>
 
-            <div className="col-span-1 md:col-span-2">
+            <div>
               <label className="text-gray-700" htmlFor="thumbel">
                 Thumbnail
               </label>
@@ -141,6 +139,17 @@ const AddVolunteer = () => {
                 type="text"
                 name="photo"
                 placeholder="Enter photo URL"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              />
+            </div>
+            <div>
+              <label className="text-gray-700" htmlFor="noofvolunteer">
+                No. of volunteers needed
+              </label>
+              <input
+                id="noofvolunteer"
+                name="noofvolunteer"
+                type="number"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>

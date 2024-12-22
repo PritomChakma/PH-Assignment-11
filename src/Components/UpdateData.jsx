@@ -38,6 +38,7 @@ const UpdateData = () => {
     const description = form.description.value;
     const location = form.location.value;
     const photo = form.photo.value;
+    const noofvolunteer = form.noofvolunteer.value;
 
     const Data = {
       title,
@@ -49,7 +50,7 @@ const UpdateData = () => {
       deadLine,
       description,
       location,
-      photo,
+      noofvolunteer,
     };
 
     console.log(Data);
@@ -157,10 +158,8 @@ const UpdateData = () => {
               />
             </div>
 
-            <div className="col-span-2">
-              <label className="text-gray-700">
-                Thumbnail
-              </label>
+            <div>
+              <label className="text-gray-700">Thumbnail</label>
               <input
                 type="text"
                 name="photo"
@@ -169,12 +168,21 @@ const UpdateData = () => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
+            <div>
+              <label className="text-gray-700" htmlFor="noofvolunteer">
+                No. of volunteers needed:
+              </label>
+              <input
+                id="noofvolunteer"
+                name="noofvolunteer"
+                type="number"
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              />
+            </div>
           </div>
 
           <div className="flex flex-col gap-2 mt-4">
-            <label className="text-gray-700">
-              Description
-            </label>
+            <label className="text-gray-700">Description</label>
             <textarea
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               name="description"

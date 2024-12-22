@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
 
@@ -8,10 +9,6 @@ const VolunteerDetails = () => {
   const { user } = useContext(AuthContex);
 
   const [post, setPost] = useState({});
-  const [formData, setFormData] = useState({
-    suggestion: "",
-    status: "requested",
-  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,20 +26,53 @@ const VolunteerDetails = () => {
     fetchPost();
   }, [id]);
 
-  const handleRequest = async () => {
-    try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/volunteer-request`, {
-        ...formData,
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      await axios.patch(
-        `${import.meta.env.VITE_API_URL}/update-volunteers/${post._id}`
+    console.log("User Email:", user?.email);
+    console.log("Post Email:", post?.email);
+
+    // Validation
+    if (user?.email === post?.email) {
+      toast.error("Not Permitted");
+      return;
+    }
+
+    const form = e.target;
+    const name = user?.displayName;
+    const title = post?.title;
+    const location = post?.location;
+    const category = post?.category;
+    const noofvolunteer = post?.noofvolunteer;
+    const email = user?.email;
+    const suggestion = form.suggestion.value;
+
+    const data = {
+      name,
+      email,
+      title,
+      location,
+      category,
+      suggestion,
+      noofvolunteer,
+    };
+
+    console.table(data);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/add-request`,
+        data
       );
 
-      alert("Request submitted successfully!");
-    } catch (error) {
-      console.error("Error submitting request:", error);
-      alert("Something went wrong. Please try again.");
+      form.reset();
+
+      toast.success("Request Successful!!!");
+      console.log(response.data);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.response?.data);
     }
   };
 
@@ -58,6 +88,7 @@ const VolunteerDetails = () => {
         <h1 className="text-3xl font-bold text-gray-800 mb-6">{post.title}</h1>
         {post.photo && (
           <img
+            referrerPolicy="no-referrer"
             src={post.photo}
             alt={post.title}
             className="w-full h-64 object-cover rounded-lg mb-6 shadow-md"
@@ -71,7 +102,7 @@ const VolunteerDetails = () => {
         <p className="mb-4 text-gray-700">
           <h2>
             <span className="font-bold">Location:</span>
-            {post.location}s{" "}
+            {post.location}
           </h2>
         </p>
         <p className="mb-4 text-gray-700">
@@ -83,7 +114,7 @@ const VolunteerDetails = () => {
         <p className="mb-4 text-gray-700">
           <h2>
             <span className="font-bold"> No. of Volunteers Needed:</span>
-            {post.volunteersNeeded}
+            {post.noofvolunteer}
           </h2>
         </p>
         <p className="mb-4 text-gray-700">
@@ -108,52 +139,100 @@ const VolunteerDetails = () => {
         </div>
       </div>
 
-      {/* Modal */}
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box rounded-lg">
+        <form onSubmit={handleSubmit} className="modal-box rounded-lg">
           <h3 className="text-2xl font-bold text-gray-800">
             Volunteer Request
           </h3>
-          <p className="py-4 text-gray-600">
-            Please review your details before submitting.
-          </p>
+
           <div className="space-y-4">
             <div>
               <label className="block font-semibold text-gray-700">
+                Title:
+              </label>
+              <input
+                name="title"
+                type="text"
+                defaultValue={post.title}
+                readOnly
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-gray-700">
+                Location:
+              </label>
+              <input
+                name="location"
+                type="text"
+                defaultValue={post.location}
+                readOnly
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-gray-700">
+                Category:
+              </label>
+              <input
+                name="category"
+                type="text"
+                defaultValue={post.category}
+                readOnly
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-gray-700 ">
                 Volunteer Name:
               </label>
               <input
+                name="name"
                 type="text"
                 defaultValue={user?.displayName}
                 readOnly
-                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none"
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
               />
             </div>
+
             <div>
               <label className="block font-semibold text-gray-700">
                 Volunteer Email:
               </label>
               <input
+                name="email"
                 type="email"
                 defaultValue={user?.email}
                 readOnly
-                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none"
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
               />
             </div>
+            <div>
+              <label className="block font-semibold text-gray-700">
+                No. of volunteers needed:
+              </label>
+              <input
+                name="noofvolunteer"
+                type="noofvolunteer"
+                defaultValue={post?.noofvolunteer}
+                readOnly
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
+              />
+            </div>
+
             <div>
               <label className="block font-semibold text-gray-700">
                 Suggestion:
               </label>
               <textarea
-                value={formData.suggestion}
-                // onChange={(e) =>
-                //   setFormData({ ...formData, suggestion: e.target.value })
-                // }
-                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2"
+                name="suggestion"
+                className="w-full border-gray-300 rounded-md p-2 shadow-sm focus:outline-none border-2 h-20"
+                placeholder="Write your suggestion here..."
               ></textarea>
             </div>
           </div>
+
           <div className="modal-action flex items-center justify-between">
             <label
               htmlFor="my_modal_6"
@@ -162,15 +241,16 @@ const VolunteerDetails = () => {
               Cancel
             </label>
             <button
-              onClick={handleRequest}
+              type="submit"
               className="btn bg-green-600 text-white rounded-md hover:bg-green-700"
             >
               Submit
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
 };
+
 export default VolunteerDetails;
