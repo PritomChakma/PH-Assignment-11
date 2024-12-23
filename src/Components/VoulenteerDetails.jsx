@@ -45,12 +45,10 @@ const VolunteerDetails = () => {
     const deadLine = post?.deadLine;
     const suggestion = form.suggestion.value;
     const postId = post?._id;
+    const volunteer = post?.volunteer;
 
-    // Ensure the required data is available
-    if (!title || !location || !category || !email || !suggestion) {
-      toast.error("Please fill all the fields!");
-      return;
-    }
+    if (user?.email === volunteer?.email)
+      return toast.error("Action not permitted!");
 
     const data = {
       name,
@@ -63,6 +61,7 @@ const VolunteerDetails = () => {
       postId,
       deadLine,
       status: "Pending",
+      volunteer: volunteer?.email,
     };
 
     try {

@@ -1,3 +1,5 @@
+// <<<<<<<---------------This is manage-my-post sorry for i wrote wrong page name ------------------>>>>>>>>
+
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -25,7 +27,54 @@ const MyRequest = () => {
       toast.error("Failed to fetch posts.");
     }
   };
-  console.log(request);
+ 
+
+
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/request/${id}`
+      );
+
+      toast.success("Request successfully deleted!");
+      setRequest((request) => request.filter((req) => req._id !== id));
+    } catch (error) {
+      console.error(
+        "Error deleting post:",
+        error.response?.data || error.message
+      );
+      toast.error(error.message);
+    }
+  };
+
+  const confirmDelete = (id) => {
+    toast((t) => (
+      <div className="flex gap-3 items-center">
+        <p>Are you sure you want to delete this Request?</p>
+        <div className="flex gap-2">
+          <button
+            className="bg-red-500 text-white px-2 py-1 rounded-md"
+            onClick={() => {
+              toast.dismiss(t.id);
+              handleDelete(id);
+            }}
+          >
+            Delete
+          </button>
+          <button
+            className="bg-green-500 text-white px-2 py-1 rounded-md"
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
+
+
   return (
     <section className="container px-4 mx-auto my-12">
       <div className="flex items-center gap-x-3">
@@ -72,7 +121,7 @@ const MyRequest = () => {
                       <td className="px-4 py-4 text-sm">{req.status}</td>
                       <td className="px-4 py-4 text-sm">
                         <button
-                          onClick={() => confirmDelete(post._id)}
+                           onClick={() => confirmDelete(req._id)}
                           className="flex items-center gap-1 text-red-500 transition duration-200"
                         >
                           <FaTrashAlt className="w-4 h-4" />

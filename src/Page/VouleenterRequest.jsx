@@ -1,6 +1,32 @@
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai"; // Importing React Icons
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import { AuthContex } from "../Provider/AuthProvider";
 
 const VouleenterRequest = () => {
+  const { user } = useContext(AuthContex);
+  const [request, setRequest] = useState([]);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchMyRequest();
+    }
+  }, [user]);
+
+  const fetchMyRequest = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/vouleenter-request/${user?.email}`
+      );
+      setRequest(data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      toast.error("Failed to fetch posts.");
+    }
+  };
+
+  console.log(request);
+
   return (
     <section className="container px-4 mx-auto my-12">
       <div className="flex items-center gap-x-3">
@@ -24,13 +50,13 @@ const VouleenterRequest = () => {
                       scope="col"
                       className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right"
                     >
-                      <div className="flex items-center gap-x-3 font-semibold ">
+                      <div className="flex items-center gap-x-3 font-semibold">
                         <span>Title</span>
                       </div>
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 px-4 text-sm font-semibold  text-left rtl:text-right "
+                      className="py-3.5 px-4 text-sm font-semibold text-left rtl:text-right"
                     >
                       <div className="flex items-center gap-x-3">
                         <span>Email</span>
@@ -39,70 +65,76 @@ const VouleenterRequest = () => {
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right "
+                      className="px-4 py-3.5 text-sm font-semibold text-left rtl:text-right"
                     >
                       <span>Deadline</span>
                     </th>
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right "
+                      className="px-4 py-3.5 text-sm font-semibold text-left rtl:text-right"
                     >
                       Category
                     </th>
 
                     <th
                       scope="col"
-                      className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right "
+                      className="px-4 py-3.5 text-sm font-semibold text-left rtl:text-right"
                     >
                       Status
                     </th>
 
-                    <th className="px-4 py-3.5 text-sm font-semibold text-left rtl:text-right ">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left rtl:text-right">
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-4 text-sm  whitespace-nowrap">
-                    Beach Cleanup Drive
-                    </td>
-                    <td className="px-4 py-4 text-sm  whitespace-nowrap">
-                      chakmapritom1@gmail.com
-                    </td>
+                  {request.map((req) => (
+                    <tr key={req._id}>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        {req.title}
+                      </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        {req.email}
+                      </td>
 
-                    <td className="px-4 py-4 text-sm  whitespace-nowrap">
-                      28/05/2024
-                    </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        {new Date(req.deadLine).toLocaleDateString()}
+                      </td>
 
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <div className="flex items-center gap-x-2">
-                        <p className="px-3 py-1 rounded-full ">
-                          Education
-                        </p>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm font-medium  whitespace-nowrap">
-                      <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-yellow-100/60 text-yellow-500">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
-                        <h2 className="text-sm font-normal">Complete</h2>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <div className="flex items-center gap-x-6">
-                        {/* Complete Button */}
-                        <button className="disabled:cursor-not-allowed  transition-colors duration-200 hover:text-green-500 focus:outline-none">
-                          <AiOutlineCheckCircle className="w-5 h-5" />
-                        </button>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <div className="flex items-center gap-x-2">
+                          <p className="px-3 py-1 rounded-full">
+                            {req.category}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-yellow-100/60 text-yellow-500">
+                          <span className="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+                          <h2 className="text-sm font-normal">Complete</h2>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm whitespace-nowrap">
+                        <div className="flex items-center gap-x-6">
+                          <button
+                            className="transition-transform duration-200 transform focus:outline-none text-green-500 p-2 rounded-full border border-transparent "
+                            aria-label="Complete"
+                          >
+                            <AiOutlineCheckCircle className="w-6 h-6" />
+                          </button>
 
-                        {/* Delete Button */}
-                        <button className="disabled:cursor-not-allowed  transition-colors duration-200 hover:text-red-500 focus:outline-none">
-                          <AiOutlineCloseCircle className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                          <button
+                            className="transition-transform duration-200 transform  focus:outline-none text-red-500 p-2 rounded-full border border-transparent "
+                            aria-label="Delete"
+                          >
+                            <AiOutlineCloseCircle className="w-6 h-6" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
