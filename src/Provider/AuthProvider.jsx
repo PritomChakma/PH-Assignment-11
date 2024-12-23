@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
@@ -41,9 +42,25 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
   useEffect(() => {
-    const unSubscreibe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscreibe = onAuthStateChanged(auth, async (currentUser) => {
       // console.log("current user", currentUser);
-      setUser(currentUser);
+      if (currentUser?.email) {
+        setUser(currentUser);
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: currentUser?.email,
+          },
+          { withCredentials: true }
+        );
+        console.log(data);
+      } else {
+        setUser(currentUser);
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/logout`,
+          { withCredentials: true }
+        );
+      }
       setLoading(false);
     });
 

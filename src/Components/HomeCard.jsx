@@ -63,6 +63,7 @@ const VolunteerNeedsNow = () => {
                 year: "numeric",
               })}
             </p>
+            <p className="text-gray-600"> No. of volunteers needed: {post.noofvolunteer}</p>
             <button
               onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"

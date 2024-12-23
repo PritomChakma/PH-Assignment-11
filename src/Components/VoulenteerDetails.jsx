@@ -43,6 +43,7 @@ const VolunteerDetails = () => {
     const noofvolunteer = post?.noofvolunteer;
     const email = user?.email;
     const suggestion = form.suggestion.value;
+    const postId = post?._id;
 
     // Ensure the required data is available
     if (!title || !location || !category || !email || !suggestion) {
@@ -58,21 +59,20 @@ const VolunteerDetails = () => {
       category,
       suggestion,
       noofvolunteer,
+      postId,
     };
-
-    console.table(data);
-
+  
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/add-request`,
         data
       );
-
-      form.reset();
+ 
 
       toast.success("Request Successful!!!");
+      form.reset();
       console.log(response.data);
-      navigate("/"); // redirect to homepage or other page after success
+      navigate("/"); 
     } catch (err) {
       console.log(err);
       toast.error(err?.response?.data || "Something went wrong");
