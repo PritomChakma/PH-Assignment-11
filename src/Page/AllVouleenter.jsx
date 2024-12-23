@@ -96,7 +96,7 @@ const AllVolunteer = () => {
             <p className="">
               Deadline: {new Date(post.deadLine).toLocaleDateString()}
             </p>
-            <p className=""> No. of volunteers needed {post.noofvolunteer}</p>
+            <p className=""> No. of volunteers needed: {post.noofvolunteer}</p>
             <button
               onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"

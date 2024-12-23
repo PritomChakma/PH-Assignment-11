@@ -42,6 +42,7 @@ const VolunteerDetails = () => {
     const category = post?.category;
     const noofvolunteer = post?.noofvolunteer;
     const email = user?.email;
+    const deadLine = post?.deadLine;
     const suggestion = form.suggestion.value;
     const postId = post?._id;
 
@@ -60,19 +61,20 @@ const VolunteerDetails = () => {
       suggestion,
       noofvolunteer,
       postId,
+      deadLine,
+      status: "Pending",
     };
-  
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/add-request`,
         data
       );
- 
 
       toast.success("Request Successful!!!");
       form.reset();
       console.log(response.data);
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       console.log(err);
       toast.error(err?.response?.data || "Something went wrong");

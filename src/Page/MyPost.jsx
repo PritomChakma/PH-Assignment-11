@@ -25,6 +25,7 @@ const MyPost = () => {
       toast.error("Failed to fetch posts.");
     }
   };
+ 
 
   const handleDelete = async (id) => {
     try {

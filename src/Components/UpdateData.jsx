@@ -56,7 +56,7 @@ const UpdateData = () => {
     console.log(Data);
 
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/updatedJob/${id}`, Data);
+      await axios.put(`${import.meta.env.VITE_API_URL}/updatedPost/${id}`, Data);
       form.reset();
       toast.success("Data Updated Successfully!");
       navigate("/myPost");
@@ -173,6 +173,7 @@ const UpdateData = () => {
                 No. of volunteers needed:
               </label>
               <input
+               defaultValue={posts?.noofvolunteer}
                 id="noofvolunteer"
                 name="noofvolunteer"
                 type="number"

@@ -1,15 +1,39 @@
-import { FiCheckCircle } from "react-icons/fi"; // Import React Icon
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaTrashAlt } from "react-icons/fa";
+import { AuthContex } from "../Provider/AuthProvider";
 
 const MyRequest = () => {
+  const { user } = useContext(AuthContex);
+  const [request, setRequest] = useState([]);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchMyRequest();
+    }
+  }, [user]);
+
+  const fetchMyRequest = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/request/${user?.email}`
+      );
+      setRequest(data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      toast.error("Failed to fetch posts.");
+    }
+  };
+  console.log(request);
   return (
     <section className="container px-4 mx-auto my-12">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-gray-800">
           My Volunteer Requests
         </h2>
-
         <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-          6 Requests
+          {request.length} Requests
         </span>
       </div>
 
@@ -20,75 +44,43 @@ const MyRequest = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right"
-                    >
-                      <div className="flex items-center gap-x-3 font-semibold ">
-                        <span>Title</span>
-                      </div>
+                    <th className="py-3.5 px-4 text-sm font-semibold text-left">
+                      Title
                     </th>
-
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm text-left rtl:text-right font-semibold "
-                    >
-                      <span>Deadline</span>
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left">
+                      Deadline
                     </th>
-
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right"
-                    >
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left">
                       Category
                     </th>
-
-                    <th
-                      scope="col"
-                      className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right"
-                    >
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left">
                       Status
                     </th>
-
-                    <th className="px-4 py-3.5 text-sm font-semibold  text-left rtl:text-right">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left">
                       Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      Teach Coding to Underprivileged Kids
-                    </td>
-
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      28/05/2024
-                    </td>
-
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <div className="flex items-center gap-x-2">
-                        <span className="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-full">
-                          Education
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                      <div
-                        className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-yellow-100/60 text-yellow-500"
-                      >
-                        <span className="h-1.5 w-1.5 rounded-full bg-yellow-500"></span>
-                        <h2 className="text-sm font-normal">Pending</h2>
-                      </div>
-                    </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
-                      <button
-                        title="Mark Complete"
-                        className="text-gray-500 transition-colors duration-200 hover:text-green-500 focus:outline-none"
-                      >
-                        <FiCheckCircle className="w-5 h-5" />
-                      </button>
-                    </td>
-                  </tr>
+                  {request.map((req) => (
+                    <tr key={req._id}>
+                      <td className="px-4 py-4 text-sm">{req.title}</td>
+                      <td className="px-4 py-4 text-sm">
+                        {new Date(req.deadLine).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-4 text-sm">{req.category}</td>
+                      <td className="px-4 py-4 text-sm">{req.status}</td>
+                      <td className="px-4 py-4 text-sm">
+                        <button
+                          onClick={() => confirmDelete(post._id)}
+                          className="flex items-center gap-1 text-red-500 transition duration-200"
+                        >
+                          <FaTrashAlt className="w-4 h-4" />
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
