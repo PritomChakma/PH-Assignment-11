@@ -10,6 +10,7 @@ import MyPost from "../Page/MyPost";
 import MyRequest from "../Page/MyRequest";
 import Registration from "../Page/Registration";
 import SignIn from "../Page/SignIn";
+import VouleenterRequest from "../Page/VouleenterRequest";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyRequest></MyRequest>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/vouleenteerRequest",
+        element: (
+          <PrivateRoute>
+            <VouleenterRequest></VouleenterRequest>
           </PrivateRoute>
         ),
       },

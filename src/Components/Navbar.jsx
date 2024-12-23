@@ -89,6 +89,9 @@ const Navbar = () => {
                   <Link to="/myRequest"> My Request</Link>
                 </li>
                 <li>
+                  <Link to="/vouleenteerRequest">Vouleenter Request</Link>
+                </li>
+                <li>
                   {user ? (
                     <NavLink
                       to="/signin"
