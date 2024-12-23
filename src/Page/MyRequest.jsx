@@ -1,9 +1,7 @@
-// <<<<<<<---------------This is manage-my-post sorry for i wrote wrong page name ------------------>>>>>>>>
-
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrashAlt } from "react-icons/fa";
+import { IoArchiveOutline } from "react-icons/io5";
 import { AuthContex } from "../Provider/AuthProvider";
 
 const MyRequest = () => {
@@ -23,57 +21,30 @@ const MyRequest = () => {
       );
       setRequest(data);
     } catch (error) {
-      console.error("Error fetching posts:", error);
-      toast.error("Failed to fetch posts.");
+      console.error("Error fetching requests:", error);
+      toast.error("Failed to fetch requests.");
     }
   };
- 
 
+  const handleChangeStatus = async (id, prevStatus, status) => {
+    if (prevStatus === status)
+      return console.log("Status is already " + status);
 
-
-  const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/request/${id}`
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/reqStatus-update/${id}`,
+        { status }
       );
+      toast.success(`Status changed to ${status}`);
 
-      toast.success("Request successfully deleted!");
-      setRequest((request) => request.filter((req) => req._id !== id));
-    } catch (error) {
-      console.error(
-        "Error deleting post:",
-        error.response?.data || error.message
+      setRequest((prevRequests) =>
+        prevRequests.map((req) => (req._id === id ? { ...req, status } : req))
       );
-      toast.error(error.message);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
     }
   };
-
-  const confirmDelete = (id) => {
-    toast((t) => (
-      <div className="flex gap-3 items-center">
-        <p>Are you sure you want to delete this Request?</p>
-        <div className="flex gap-2">
-          <button
-            className="bg-red-500 text-white px-2 py-1 rounded-md"
-            onClick={() => {
-              toast.dismiss(t.id);
-              handleDelete(id);
-            }}
-          >
-            Delete
-          </button>
-          <button
-            className="bg-green-500 text-white px-2 py-1 rounded-md"
-            onClick={() => toast.dismiss(t.id)}
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    ));
-  };
-
-
 
   return (
     <section className="container px-4 mx-auto my-12">
@@ -121,11 +92,16 @@ const MyRequest = () => {
                       <td className="px-4 py-4 text-sm">{req.status}</td>
                       <td className="px-4 py-4 text-sm">
                         <button
-                           onClick={() => confirmDelete(req._id)}
+                          onClick={() =>
+                            handleChangeStatus(req._id, req.status, "Completed")
+                          }
                           className="flex items-center gap-1 text-red-500 transition duration-200"
+                          disabled={
+                            req.status === "Completed" ||
+                            req.status === "Rejected"
+                          }
                         >
-                          <FaTrashAlt className="w-4 h-4" />
-                          Delete
+                          <IoArchiveOutline className="w-5 h-5" />
                         </button>
                       </td>
                     </tr>
