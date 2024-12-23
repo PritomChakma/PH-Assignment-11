@@ -53,6 +53,7 @@ const VolunteerNeedsNow = () => {
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
               {post.title}
             </h3>
+            <p className="text-gray-600">Category: {post.noofvolunteer}</p>
             <p className="text-gray-600">Category: {post.category}</p>
             <p className="text-gray-600">
               Deadline:

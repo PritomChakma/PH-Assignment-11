@@ -7,6 +7,7 @@ import AddVolunteer from "../Page/AddVolunteer";
 import AllVolunteer from "../Page/AllVouleenter";
 import Home from "../Page/Home";
 import MyPost from "../Page/MyPost";
+import MyRequest from "../Page/MyRequest";
 import Registration from "../Page/Registration";
 import SignIn from "../Page/SignIn";
 import PrivateRoute from "./PrivateRoute";
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPost></MyPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myRequest",
+        element: (
+          <PrivateRoute>
+            <MyRequest></MyRequest>
           </PrivateRoute>
         ),
       },

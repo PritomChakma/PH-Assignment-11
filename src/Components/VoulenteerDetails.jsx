@@ -29,9 +29,6 @@ const VolunteerDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("User Email:", user?.email);
-    console.log("Post Email:", post?.email);
-
     // Validation
     if (user?.email === post?.email) {
       toast.error("Not Permitted");
@@ -46,6 +43,12 @@ const VolunteerDetails = () => {
     const noofvolunteer = post?.noofvolunteer;
     const email = user?.email;
     const suggestion = form.suggestion.value;
+
+    // Ensure the required data is available
+    if (!title || !location || !category || !email || !suggestion) {
+      toast.error("Please fill all the fields!");
+      return;
+    }
 
     const data = {
       name,
@@ -69,18 +72,12 @@ const VolunteerDetails = () => {
 
       toast.success("Request Successful!!!");
       console.log(response.data);
-      navigate("/");
+      navigate("/"); // redirect to homepage or other page after success
     } catch (err) {
       console.log(err);
-      toast.error(err?.response?.data);
+      toast.error(err?.response?.data || "Something went wrong");
     }
   };
-
-  if (!post._id) {
-    return (
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-600"></div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">

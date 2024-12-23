@@ -23,10 +23,33 @@ const AllVolunteer = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    const delayFn = setTimeout(() => {
+      if (search) {
+        handleSearch();
+      } else {
+        fetchAllPosts();
+      }
+    }, 500);
+
+    return () => clearTimeout(delayFn);
+  }, [search]);
+
+  const fetchAllPosts = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/all-volunteer`
+      );
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching all posts:", error);
+    }
+  };
+
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/volunteer-posts?title=${search}`
+        `${import.meta.env.VITE_API_URL}/all-volunteer?title=${search}`
       );
       setPosts(response.data);
     } catch (error) {
@@ -73,7 +96,7 @@ const AllVolunteer = () => {
             <p className="">
               Deadline: {new Date(post.deadLine).toLocaleDateString()}
             </p>
-            <p className=""> No. of volunteers needed: {post.noofvolunteer}</p>
+            <p className=""> No. of volunteers needed {post.noofvolunteer}</p>
             <button
               onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
               className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
@@ -83,9 +106,6 @@ const AllVolunteer = () => {
           </div>
         ))}
       </div>
-      {posts.length === 0 && (
-        <p className="text-center text-gray-500 mt-8">No posts found.</p>
-      )}
     </div>
   );
 };
