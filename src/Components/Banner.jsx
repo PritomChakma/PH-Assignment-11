@@ -9,6 +9,7 @@ import banner2 from "../assets/banner-2.jpeg";
 import banner3 from "../assets/banner-3.jpg";
 
 // import required modules
+import { Link } from "react-router-dom";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const Banner = () => {
@@ -39,15 +40,20 @@ const Banner = () => {
               <div className="bg-opacity-45 hero-overlay"></div>
               <div className="hero-content text-white ">
                 <div className="max-w-md">
-                  <h1 className="mb-5 text-5xl font-bold">Asphalt 9</h1>
+                  <h1 className="mb-5 text-5xl font-bold">
+                    Youth Education Mentor
+                  </h1>
                   <p className="mb-5">
-                    Asphalt 9: Legends is an arcade racing game developed and
-                    published by Gameloft, released in 2018. It is the latest
-                    installment in the Asphalt series and offers an exciting,
-                    fast-paced racing experience.
+                    mpower the next generation by volunteering as a Youth
+                    Education Mentor. You'll work with underprivileged children,
+                    assisting with homework, organizing creative workshops, and
+                    fostering a love for learning. Whether teaching math,
+                    science, or art, your guidance can open doors to brighter
+                    futures for these young minds. Be the inspiration they need
+                    to achieve their dreams.
                   </p>
-                  <button className="btn bg-gray-900 text-white">
-                    Get Started
+                  <button className="btn bg-[#EF4C53] text-white">
+                    <Link to="/allVolunteer">Vouleenter Now</Link>
                   </button>
                 </div>
               </div>
@@ -63,15 +69,20 @@ const Banner = () => {
               <div className="bg-opacity-45 hero-overlay"></div>
               <div className="hero-content text-white">
                 <div className="max-w-md">
-                  <h1 className="mb-5 text-5xl font-bold">Clash of Clans</h1>
+                  <h1 className="mb-5 text-5xl font-bold">
+                    {" "}
+                    Elderly Care Companion
+                  </h1>
                   <p className="mb-5">
-                    Clash of Clans (CoC) is a popular free-to-play mobile
-                    strategy game developed and published by Supercell. Released
-                    in 2012, it has remained a favorite among gamers for its mix
-                    of base-building, resource management, and strategic combat.
+                    Brighten the lives of senior citizens in your community by
+                    becoming an Elderly Care Companion. Spend quality time
+                    chatting, playing games, or helping with errands. Your
+                    kindness and companionship can alleviate loneliness and
+                    bring joy to their days. Small gestures make a big
+                    difference—help create cherished memories for our seniors.
                   </p>
-                  <button className="btn bg-gray-900 text-white">
-                    Get Started
+                  <button className="btn bg-[#EF4C53] text-white">
+                    <Link to="/allVolunteer">Vouleenter Now</Link>
                   </button>
                 </div>
               </div>
@@ -89,17 +100,17 @@ const Banner = () => {
               <div className="hero-content text-white ">
                 <div className="max-w-md">
                   <h1 className="mb-5 text-5xl font-bold">
-                    The Legend of Zelda
+                    Community Clean-Up Champion
                   </h1>
                   <p className="mb-5">
-                    The Legend of Zelda: Breath of the Wild (BotW) is an
-                    open-world action-adventure game developed and published by
-                    Nintendo. Released in 2017 for the Nintendo Switch and Wii
-                    U, it is widely considered one of the greatest video games
-                    of all time.
+                    Join us in making our community a cleaner, greener place to
+                    live! As a Community Clean-Up Champion, you'll participate
+                    in organizing and executing litter collection drives,
+                    recycling initiatives, and awareness campaigns to promote
+                    sustainable waste management.
                   </p>
-                  <button className="btn bg-gray-900 text-white">
-                    Get Started
+                  <button className="btn bg-[#EF4C53] text-white">
+                    <Link to="/allVolunteer">Vouleenter Now</Link>
                   </button>
                 </div>
               </div>

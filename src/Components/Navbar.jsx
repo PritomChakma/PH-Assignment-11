@@ -10,7 +10,7 @@ import {
 import { RiGitPullRequestLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
-
+import logo from "../assets/Logo-removebg-preview.png"
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, signOutUser } = useContext(AuthContex);
@@ -65,7 +65,8 @@ const Navbar = () => {
     <div className="navbar bg-base-100 dark:bg-gray-900 dark:text-gray-200">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl dark:text-white">
-          Volunteer
+        <img className="h-10 w-10" src={logo} alt="" />
+          <p>Voluntero</p>
         </Link>
       </div>
       <div className="flex-none md:gap-3 items-center">

@@ -31,17 +31,7 @@ const VolunteerNeedsNow = () => {
 
   return (
     <div className="min-h-screen  py-8 transition-colors duration-300">
-      {/* Button to View All Volunteer Posts */}
-      <div className="flex justify-center my-5">
-        <Link to="/allVolunteer">
-          <button className="btn bg-[#EF4C53] text-white py-2 rounded-md hover:bg-red-600 transition">
-            View All Volunteer Post
-          </button>
-        </Link>
-      </div>
-
-      {/* Volunteer Posts Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto mt-10">
         {posts.map((post) => (
           <div
             key={post._id}
@@ -55,21 +45,15 @@ const VolunteerNeedsNow = () => {
               />
             )}
             <div className="p-5">
-              <h3 className="text-lg font-bold  mb-2">
-                {post.title}
-              </h3>
+              <h3 className="text-lg font-bold  mb-2">{post.title}</h3>
               <div className="text-sm  mb-4">
                 <p>
                   Category:{" "}
-                  <span className="font-medium ">
-                    {post.category}
-                  </span>
+                  <span className="font-medium ">{post.category}</span>
                 </p>
                 <p>
                   Location:{" "}
-                  <span className="font-medium ">
-                    {post.location}
-                  </span>
+                  <span className="font-medium ">{post.location}</span>
                 </p>
                 <p>
                   Deadline:{" "}
@@ -94,7 +78,13 @@ const VolunteerNeedsNow = () => {
           </div>
         ))}
       </div>
-
+      <div className="flex justify-center my-5">
+        <Link to="/allVolunteer">
+          <button className="btn bg-[#EF4C53] text-white py-2 rounded-md hover:bg-red-600 transition">
+            View All Volunteer Post
+          </button>
+        </Link>
+      </div>
       {/* Loading State */}
       {loading && (
         <div className="flex justify-center mt-6">
@@ -104,6 +94,5 @@ const VolunteerNeedsNow = () => {
     </div>
   );
 };
-
 
 export default VolunteerNeedsNow;
