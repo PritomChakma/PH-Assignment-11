@@ -146,7 +146,7 @@ const Navbar = () => {
                 className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
                 onClick={handleToggleTheme}
               >
-                <CgDarkMode className="text-lg" />
+                <CgDarkMode className="text-lg text-white" />
                 {theme === "light" ? "Dark Mode" : "Light Mode"}
               </button>
             </li>

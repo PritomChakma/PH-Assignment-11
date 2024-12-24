@@ -30,68 +30,67 @@ const VolunteerNeedsNow = () => {
   }, []);
 
   return (
-    <div className="min-h-screen  py-8 transition-colors duration-300">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto mt-10">
-        {posts.map((post) => (
-          <div
-            key={post._id}
-            className="rounded-lg shadow-lg border  hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            {post.photo && (
-              <img
-                src={post.photo}
-                alt={post.title}
-                className="w-full h-48 object-cover rounded-t-lg"
-              />
-            )}
-            <div className="p-5">
-              <h3 className="text-lg font-bold  mb-2">{post.title}</h3>
-              <div className="text-sm  mb-4">
-                <p>
-                  Category:{" "}
-                  <span className="font-medium ">{post.category}</span>
-                </p>
-                <p>
-                  Location:{" "}
-                  <span className="font-medium ">{post.location}</span>
-                </p>
-                <p>
-                  Deadline:{" "}
-                  <span className="font-medium text-red-500 ">
-                    {new Date(post.deadLine).toLocaleDateString()}
-                  </span>
-                </p>
-                <p>
-                  Volunteers Needed:{" "}
-                  <span className="font-medium text-blue-500 ">
-                    {post.noofvolunteer}
-                  </span>
-                </p>
-              </div>
-              <button
-                onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-                className="w-full btn text-white bg-[#EF4C53] transition-all duration-200"
-              >
-                View Details
-              </button>
+    <div className="min-h-screen py-8 transition-colors duration-300">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-9/12 mx-auto mt-10">
+      {posts.map((post) => (
+        <div
+          key={post._id}
+          className="rounded-lg shadow-md border hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+        >
+          {post.photo && (
+            <img
+              src={post.photo}
+              alt={post.title}
+              className="w-full h-36 object-cover rounded-t-lg" // Reduced height of image
+            />
+          )}
+          <div className="p-3"> {/* Reduced padding */}
+            <h3 className="text-md font-semibold mb-2">{post.title}</h3> {/* Reduced font size */}
+            <div className="text-sm mb-4">
+              <p>
+                Category: <span className="font-medium">{post.category}</span>
+              </p>
+              <p>
+                Location: <span className="font-medium">{post.location}</span>
+              </p>
+              <p>
+                Deadline:{" "}
+                <span className="font-medium text-red-500">
+                  {new Date(post.deadLine).toLocaleDateString()}
+                </span>
+              </p>
+              <p>
+                Volunteers Needed:{" "}
+                <span className="font-medium text-blue-500">
+                  {post.noofvolunteer}
+                </span>
+              </p>
             </div>
+            <button
+              onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
+               className="w-full btn text-white bg-[#2c3e50] hover:bg-[#d8434a] transition-all duration-150 py-1 text-sm"
+            >
+              View Details
+            </button>
           </div>
-        ))}
-      </div>
-      <div className="flex justify-center my-5">
-        <Link to="/allVolunteer">
-          <button className="btn bg-[#EF4C53] text-white py-2 rounded-md hover:bg-red-600 transition">
-            View All Volunteer Post
-          </button>
-        </Link>
-      </div>
-      {/* Loading State */}
-      {loading && (
-        <div className="flex justify-center mt-6">
-          <p className="text-gray-600 dark:text-gray-300">Loading posts...</p>
         </div>
-      )}
+      ))}
     </div>
+    <div className="flex justify-center my-5">
+      <Link to="/allVolunteer">
+        <button className="btn bg-[#EF4C53] text-white py-2 px-4 rounded-md hover:bg-red-600 transition">
+          View All Volunteer Posts
+        </button>
+      </Link>
+    </div>
+    {/* Loading State */}
+    {loading && (
+      <div className="flex justify-center mt-6">
+        <p className="text-gray-600 dark:text-gray-300">Loading posts...</p>
+      </div>
+    )}
+  </div>
+  
   );
 };
 

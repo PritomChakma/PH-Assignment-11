@@ -114,25 +114,25 @@ const AllVolunteer = () => {
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
               )}
-              <div className="p-5">
-                <h3 className="text-lg font-bold mb-2">{post.title}</h3>
-                <div className="text-sm mb-4">
+              <div className="p-3 rounded-md shadow-sm">
+                <h3 className="text-md font-semibold mb-1">{post.title}</h3>
+                <div className="text-xs mb-3">
                   <p>
-                    Category:
-                    <span className="font-medium">{post.category}</span>
+                    <span className="font-semibold">Category:</span>{" "}
+                    {post.category}
                   </p>
                   <p>
-                    Location:
-                    <span className="font-medium">{post.location}</span>
+                    <span className="font-semibold">Location:</span>{" "}
+                    {post.location}
                   </p>
                   <p>
-                    Deadline:
+                    <span className="font-semibold">Deadline:</span>{" "}
                     <span className="font-medium text-red-500 dark:text-red-400">
                       {new Date(post.deadLine).toLocaleDateString()}
                     </span>
                   </p>
                   <p>
-                    Volunteers Needed:
+                    <span className="font-semibold">Volunteers Needed:</span>{" "}
                     <span className="font-medium text-blue-500 dark:text-blue-400">
                       {post.noofvolunteer}
                     </span>
@@ -140,7 +140,7 @@ const AllVolunteer = () => {
                 </div>
                 <button
                   onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-                  className="w-full btn text-white bg-[#EF4C53] transition-all duration-200"
+                  className="w-full btn text-white bg-[#2c3e50] hover:bg-[#d8434a] transition-all duration-150 py-1 text-sm"
                 >
                   View Details
                 </button>
