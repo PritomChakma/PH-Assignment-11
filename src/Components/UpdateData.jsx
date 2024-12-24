@@ -68,25 +68,25 @@ const UpdateData = () => {
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] sm:my-6">
       <section className="p-4 sm:p-6 mx-auto rounded-md shadow-md w-11/12 md:w-8/12 border-2">
-        <h2 className="text-lg font-semibold text-gray-700 capitalize text-center mb-5">
+        <h2 className="text-lg font-semibold capitalize text-center mb-5">
           Edit Volunteer Post
         </h2>
 
         <form onSubmit={handleUpdate}>
           <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
             <div>
-              <label className="text-gray-700">Post Title</label>
+              <label className="">Post Title</label>
               <input
                 id="job_title"
                 name="job_title"
                 type="text"
                 defaultValue={posts?.title}
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2   rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-gray-700">Deadline</label>
+              <label className="">Deadline</label>
               <DatePicker
                 selected={startDate}
                 // onChange={(date) => setStartDate(date)}
@@ -95,7 +95,7 @@ const UpdateData = () => {
             </div>
 
             <div>
-              <label className="text-gray-700" htmlFor="emailAddress">
+              <label className="" >
                 Organizer Email
               </label>
               <input
@@ -104,12 +104,12 @@ const UpdateData = () => {
                 name="email"
                 defaultValue={user?.email}
                 readOnly
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border border-gray-200 rounded-md focus:outline-none"
+                className="block w-full px-4 py-2 mt-2   rounded-md focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="text-gray-700" htmlFor="organizer_name">
+              <label className="" >
                 Organizer Name
               </label>
               <input
@@ -118,12 +118,12 @@ const UpdateData = () => {
                 name="organizer_name"
                 defaultValue={user?.displayName}
                 readOnly
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border border-gray-200 rounded-md focus:outline-none"
+                className="block w-full px-4 py-2 mt-2  rounded-md focus:outline-none"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="text-gray-700" htmlFor="category">
+              <label className="">
                 Category
               </label>
               <select
@@ -143,7 +143,7 @@ const UpdateData = () => {
             </div>
 
             <div>
-              <label className="text-gray-700" htmlFor="location">
+              <label className="" htmlFor="location">
                 Location
               </label>
               <input
@@ -154,22 +154,22 @@ const UpdateData = () => {
                 // onChange={(e) =>
                 //   setPosts({ ...posts, location: e.target.value })
                 // }
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
 
             <div>
-              <label className="text-gray-700">Thumbnail</label>
+              <label className="">Thumbnail</label>
               <input
                 type="text"
                 name="photo"
                 defaultValue={posts?.photo}
                 placeholder="Enter photo URL"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
             <div>
-              <label className="text-gray-700" htmlFor="noofvolunteer">
+              <label className="" htmlFor="noofvolunteer">
                 No. of volunteers needed:
               </label>
               <input
@@ -177,15 +177,15 @@ const UpdateData = () => {
                 id="noofvolunteer"
                 name="noofvolunteer"
                 type="number"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
           </div>
 
           <div className="flex flex-col gap-2 mt-4">
-            <label className="text-gray-700">Description</label>
+            <label className="">Description</label>
             <textarea
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               name="description"
               id="description"
               defaultValue={posts?.description}

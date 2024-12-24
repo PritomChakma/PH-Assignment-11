@@ -1,4 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { BiLogOut } from "react-icons/bi";
+import { CgDarkMode } from "react-icons/cg";
+import { GrLogin } from "react-icons/gr";
+import {
+  MdOutlineAddToPhotos,
+  MdOutlineManageAccounts,
+  MdPostAdd,
+} from "react-icons/md";
+import { RiGitPullRequestLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
 
@@ -7,7 +16,23 @@ const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContex);
   const dropdownRef = useRef(null);
 
-  // Close dropdown if clicked outside
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "light"
+  );
+
+  const handleToggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
+
+  useEffect(() => {
+
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -29,86 +54,104 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        // console.log("Sign out successfully")
+   
       })
       .catch((error) => {
-        // console.log("ERROR", error.message)
+        console.error("Sign out error:", error.message);
       });
   };
 
   return (
-    <div>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">
+    <div className="navbar bg-base-100 dark:bg-gray-900 dark:text-gray-200">
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-xl dark:text-white">
+          Volunteer
+        </Link>
+      </div>
+      <div className="flex-none md:gap-3 items-center">
+        <div className="flex gap-3">
+          <NavLink to="/" className="dark:text-gray-200">
+            Home
+          </NavLink>
+          <NavLink to="/allVolunteer" className="dark:text-gray-200">
             Volunteer
-          </Link>
+          </NavLink>
         </div>
-        <div className="flex-none md:gap-3 items-center">
-          <div className="flex gap-3">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/allVolunteer">All-Volunteer</NavLink>
-          </div>
 
-          <div className="dropdown dropdown-end relative" ref={dropdownRef}>
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-              onClick={toggleDropdown} // Toggle dropdown on click
-            >
-              <div className="w-10 rounded-full ">
-                {user ? (
-                  <img
-                    referrerPolicy="no-referrer"
-                    src={
-                      user?.photoURL ||
-                      "https://www.example.com/default-avatar.jpg"
-                    } // Fallback default image
-                    alt="User Avatar"
-                    className="w-10 h-10 rounded-full border-2"
-                    style={{ borderColor: "#EF4C53" }} // Custom border color
-                  />
-                ) : (
-                  <i className="fa-solid fa-user text-2xl"></i>
-                )}
-              </div>
+        <div className="dropdown dropdown-end relative" ref={dropdownRef}>
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+            onClick={toggleDropdown}
+          >
+            <div className="w-10 rounded-full">
+              {user ? (
+                <img
+                  referrerPolicy="no-referrer"
+                  src={
+                    user?.photoURL ||
+                    "https://www.example.com/default-avatar.jpg"
+                  }
+                  alt="User Avatar"
+                  className="w-10 h-10 rounded-full border-2"
+                  style={{ borderColor: "#EF4C53" }}
+                />
+              ) : (
+                <i className="fa-solid fa-user text-2xl dark:text-white"></i>
+              )}
             </div>
-            {isDropdownOpen && (
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 px-2 space-y-3 shadow"
-              >
-                <li>
-                  <Link to="/addVolunteer">Add Volunteer</Link>
-                </li>
-                <li>
-                  <Link to="/myPost"> My Posts </Link>
-                </li>
-                <li>
-                  <Link to="/myRequest"> Manage My Posts</Link>
-                </li>
-                <li>
-                  <Link to="/vouleenteerRequest">Vouleenter Request</Link>
-                </li>
-                <li>
-                  {user ? (
-                    <NavLink
-                      to="/signin"
-                      onClick={handleSignOut}
-                      className="btn btn-sm btn-error text-white"
-                    >
-                      Log Out
-                    </NavLink>
-                  ) : (
-                    <NavLink to="/signin" className="btn btn-sm btn-primary">
-                      Signin
-                    </NavLink>
-                  )}
-                </li>
-              </ul>
-            )}
           </div>
+          {isDropdownOpen && (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 dark:text-gray-200 rounded-box z-10 mt-3 w-52 px-2 space-y-3 shadow"
+            >
+              <li>
+                <Link to="/addVolunteer">
+                  <MdOutlineAddToPhotos className="text-lg" /> Add Volunteer
+                  Post
+                </Link>
+              </li>
+              <li>
+                <Link to="/myPost">
+                  <MdPostAdd className="text-lg" /> My Volunteer Posts
+                </Link>
+              </li>
+              <li>
+                <Link to="/myRequest">
+                  <MdOutlineManageAccounts className="text-lg" /> Manage My
+                  Posts
+                </Link>
+              </li>
+              <li>
+                <Link to="/vouleenteerRequest">
+                  <RiGitPullRequestLine className="text-lg" /> Volunteer Request
+                </Link>
+              </li>
+              <li>
+                <button
+                  className="flex items-center gap-2"
+                  onClick={handleToggleTheme}
+                >
+                  <CgDarkMode className="text-lg" />
+                  {theme === "light" ? "Dark Mode" : "Light Mode"}
+                </button>
+              </li>
+
+              <li>
+                {user ? (
+                  <NavLink to="/signin" onClick={handleSignOut}>
+                    <BiLogOut className="text-lg" /> Log Out
+                  </NavLink>
+                ) : (
+                  <NavLink to="/signin">
+                    <GrLogin className="text-lg" /> Signin
+                  </NavLink>
+                )}
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>

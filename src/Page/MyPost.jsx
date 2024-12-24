@@ -25,7 +25,6 @@ const MyPost = () => {
       toast.error("Failed to fetch posts.");
     }
   };
- 
 
   const handleDelete = async (id) => {
     try {
@@ -71,42 +70,45 @@ const MyPost = () => {
 
   return (
     <div className="container px-4 mx-auto py-12">
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+            <div className="overflow-hidden border  md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200 ">
+                <thead className="">
                   <tr>
-                    <th className="py-3.5 px-4 text-sm font-normal text-left">
+                    <th className="py-3.5 px-4 text-sm font-normal text-left ">
                       Title
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left">
+                    <th className="px-4 py-3.5 text-sm font-normal text-left ">
                       Location
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left">
+                    <th className="px-4 py-3.5 text-sm font-normal text-left ">
                       Deadline
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left">
+                    <th className="px-4 py-3.5 text-sm font-normal text-left ">
                       Edit/Delete
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y ">
+                <tbody className="  divide-y  ">
                   {posts.map((post) => (
-                    <tr key={post._id} className="transition duration-200">
-                      <td className="px-4 py-4 text-sm font-semibold text-gray-800">
+                    <tr
+                      key={post._id}
+                      className="transition duration-200 "
+                    >
+                      <td className="px-4 py-4 text-sm font-semibold ">
                         {post.title}
                       </td>
-                      <td className="px-4 py-4 text-sm">{post.location}</td>
-                      <td className="px-4 py-4 text-sm">
+                      <td className="px-4 py-4 text-sm ">{post.location}</td>
+                      <td className="px-4 py-4 text-sm ">
                         {format(new Date(post.deadLine), "P")}
                       </td>
                       <td className="px-4 py-4 text-sm">
                         <div className="flex gap-x-4">
                           <Link
                             to={`/updateData/${post._id}`}
-                            className="flex items-center gap-1 text-blue-500 transition duration-200"
+                            className="flex items-center gap-1 text-blue-500 dark:text-blue-400 transition duration-200"
                           >
                             <FaEdit className="w-4 h-4" />
                             Edit
@@ -114,7 +116,7 @@ const MyPost = () => {
 
                           <button
                             onClick={() => confirmDelete(post._id)}
-                            className="flex items-center gap-1 text-red-500 transition duration-200"
+                            className="flex items-center gap-1 text-red-500 dark:text-red-400 transition duration-200"
                           >
                             <FaTrashAlt className="w-4 h-4" />
                             Delete

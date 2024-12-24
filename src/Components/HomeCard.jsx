@@ -30,51 +30,80 @@ const VolunteerNeedsNow = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="min-h-screen  py-8 transition-colors duration-300">
+      {/* Button to View All Volunteer Posts */}
       <div className="flex justify-center my-5">
         <Link to="/allVolunteer">
-          <button className="btn bg-[#EF4C53] text-white py-2 rounded-md ">
+          <button className="btn bg-[#EF4C53] text-white py-2 rounded-md hover:bg-red-600 transition">
             View All Volunteer Post
           </button>
         </Link>
       </div>
 
+      {/* Volunteer Posts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto">
         {posts.map((post) => (
           <div
             key={post._id}
-            className="bg-white p-4 rounded-md shadow-md border hover:shadow-lg"
+            className="rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
-            <img
-              src={post?.photo}
-              alt={post?.title}
-              className="w-full h-40 md:h-48 lg:h-56 object-cover rounded-md mb-4"
-            />
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-              {post.title}
-            </h3>
-            <p className="text-gray-600">Category: {post.noofvolunteer}</p>
-            <p className="text-gray-600">Category: {post.category}</p>
-            <p className="text-gray-600">
-              Deadline:
-              {new Date(post?.deadLine).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
-            <p className="text-gray-600"> No. of volunteers needed: {post.noofvolunteer}</p>
-            <button
-              onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-              className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-            >
-              View Details
-            </button>
+            {post.photo && (
+              <img
+                src={post.photo}
+                alt={post.title}
+                className="w-full h-48 object-cover rounded-t-lg"
+              />
+            )}
+            <div className="p-5">
+              <h3 className="text-lg font-bold  mb-2">
+                {post.title}
+              </h3>
+              <div className="text-sm  mb-4">
+                <p>
+                  Category:{" "}
+                  <span className="font-medium ">
+                    {post.category}
+                  </span>
+                </p>
+                <p>
+                  Location:{" "}
+                  <span className="font-medium ">
+                    {post.location}
+                  </span>
+                </p>
+                <p>
+                  Deadline:{" "}
+                  <span className="font-medium text-red-500 dark:text-red-400">
+                    {new Date(post.deadLine).toLocaleDateString()}
+                  </span>
+                </p>
+                <p>
+                  Volunteers Needed:{" "}
+                  <span className="font-medium text-blue-500 dark:text-blue-400">
+                    {post.noofvolunteer}
+                  </span>
+                </p>
+              </div>
+              <button
+                onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-md font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-200"
+              >
+                View Details
+              </button>
+            </div>
           </div>
         ))}
       </div>
+
+      {/* Loading State */}
+      {loading && (
+        <div className="flex justify-center mt-6">
+          <p className="text-gray-600 dark:text-gray-300">Loading posts...</p>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default VolunteerNeedsNow;
