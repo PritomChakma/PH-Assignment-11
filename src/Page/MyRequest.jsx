@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoArchiveOutline } from "react-icons/io5";
 import { AuthContex } from "../Provider/AuthProvider";
-
+import useAxiosSecure from "../hook/useAxiosSecure";
 const MyRequest = () => {
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContex);
   const [request, setRequest] = useState([]);
 
@@ -16,8 +17,8 @@ const MyRequest = () => {
 
   const fetchMyRequest = async () => {
     try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/request/${user?.email}`
+      const { data } = await axiosSecure.get(
+        `/request/${user?.email}`
       );
       setRequest(data);
     } catch (error) {
@@ -31,8 +32,8 @@ const MyRequest = () => {
       return console.log("Status is already " + status);
 
     try {
-      const { data } = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/reqStatus-update/${id}`,
+      const { data } = await axiosSecure.patch(
+        `/reqStatus-update/${id}`,
         { status }
       );
       toast.success(`Status changed to ${status}`);

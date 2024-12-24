@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const MyPost = () => {
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContex);
   const [posts, setPosts] = useState([]);
 
@@ -16,8 +18,8 @@ const MyPost = () => {
 
   const fetchMyPosts = async () => {
     try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/post/${user?.email}`
+      const { data } = await axiosSecure.get(
+        `/post/${user?.email}`
       );
       setPosts(data);
     } catch (error) {
@@ -28,8 +30,8 @@ const MyPost = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/post/${id}`
+      const response = await axiosSecure.delete(
+        `/post/${id}`
       );
 
       toast.success("Post successfully deleted!");

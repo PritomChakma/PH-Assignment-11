@@ -4,8 +4,10 @@ import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const UpdateData = () => {
+  const axiosSecure = useAxiosSecure()
   const { id } = useParams();
   const [posts, setPosts] = useState({});
   const [startDate, setStartDate] = useState(new Date());
@@ -15,8 +17,8 @@ const UpdateData = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/update/${id}`
+        const response = await axiosSecure.get(
+          `/update/${id}`
         );
         setPosts(response.data);
         setStartDate(new Date(response.data.deadLine));
@@ -56,7 +58,7 @@ const UpdateData = () => {
     console.log(Data);
 
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/updatedPost/${id}`, Data);
+      await axiosSecure.put(`/updatedPost/${id}`, Data);
       form.reset();
       toast.success("Data Updated Successfully!");
       navigate("/myPost");
@@ -81,7 +83,7 @@ const UpdateData = () => {
                 name="job_title"
                 type="text"
                 defaultValue={posts?.title}
-                className="block w-full px-4 py-2 mt-2   rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 border-2  rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
               />
             </div>
 
@@ -90,7 +92,7 @@ const UpdateData = () => {
               <DatePicker
                 selected={startDate}
                 // onChange={(date) => setStartDate(date)}
-                className="block w-full border p-2 rounded-md"
+                className="block w-full  p-2 rounded-md border-2 " 
               />
             </div>
 
@@ -104,7 +106,7 @@ const UpdateData = () => {
                 name="email"
                 defaultValue={user?.email}
                 readOnly
-                className="block w-full px-4 py-2 mt-2   rounded-md focus:outline-none"
+                className="block w-full px-4 py-2 mt-2 border-2   rounded-md focus:outline-none"
               />
             </div>
 
@@ -118,7 +120,7 @@ const UpdateData = () => {
                 name="organizer_name"
                 defaultValue={user?.displayName}
                 readOnly
-                className="block w-full px-4 py-2 mt-2  rounded-md focus:outline-none"
+                className="block w-full px-4 py-2 mt-2 border-2   rounded-md focus:outline-none"
               />
             </div>
 
@@ -130,7 +132,7 @@ const UpdateData = () => {
                 name="category"
                 id="category"
                 defaultValue={posts?.category}
-                className="block w-full border p-2 rounded-md"
+                className="block w-full  p-2 border-2  rounded-md"
               >
                 <option value="" disabled>
                   Select a Category
@@ -154,7 +156,7 @@ const UpdateData = () => {
                 // onChange={(e) =>
                 //   setPosts({ ...posts, location: e.target.value })
                 // }
-                className="block w-full px-4 py-2 mt-2rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring border-2 "
               />
             </div>
 
@@ -165,7 +167,7 @@ const UpdateData = () => {
                 name="photo"
                 defaultValue={posts?.photo}
                 placeholder="Enter photo URL"
-                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring border-2 "
               />
             </div>
             <div>
@@ -177,7 +179,7 @@ const UpdateData = () => {
                 id="noofvolunteer"
                 name="noofvolunteer"
                 type="number"
-                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+                className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring border-2 "
               />
             </div>
           </div>
@@ -185,7 +187,7 @@ const UpdateData = () => {
           <div className="flex flex-col gap-2 mt-4">
             <label className="">Description</label>
             <textarea
-              className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring border-2 "
               name="description"
               id="description"
               defaultValue={posts?.description}

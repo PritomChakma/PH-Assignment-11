@@ -3,8 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const VolunteerDetails = () => {
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const { user } = useContext(AuthContex);
 
@@ -14,8 +16,8 @@ const VolunteerDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/update/${id}`
+        const response = await axiosSecure.get(
+          `/update/${id}`
         );
         setPost(response.data);
       } catch (error) {
@@ -65,8 +67,8 @@ const VolunteerDetails = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/add-request`,
+      const response = await axiosSecure.post(
+        `/add-request`,
         data
       );
 
