@@ -13,13 +13,12 @@ const VolunteerRequest = () => {
     if (user?.email) {
       fetchMyRequest();
     }
-  }, [user]);
+  }, [user,axiosSecure]);
 
   const fetchMyRequest = async () => {
     try {
       const { data } = await axiosSecure.get(
         `/vouleenter-request/${user?.email}?volunteer=true`
-
       );
       setRequest(data);
     } catch (error) {

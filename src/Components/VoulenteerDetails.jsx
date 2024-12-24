@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
@@ -114,6 +113,21 @@ const VolunteerDetails = () => {
             {post.noofvolunteer}
           </h2>
         </p>
+
+        <p className="mb-4">
+          <h2>
+            <span className="font-bold">Vouleenter Name:</span>
+            {user.displayName}
+          </h2>
+        </p>
+
+        <p className="mb-4">
+          <h2>
+            <span className="font-bold">Vouleenter Email:</span>
+            {user.email}
+          </h2>
+        </p>
+
         <p className="mb-4">
           <h2>
             <span className="font-bold">Description:</span> {post.description}

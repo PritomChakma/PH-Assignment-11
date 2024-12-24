@@ -13,7 +13,7 @@ const MyRequest = () => {
     if (user?.email) {
       fetchMyRequest();
     }
-  }, [user]);
+  }, [user,axiosSecure]);
 
   const fetchMyRequest = async () => {
     try {

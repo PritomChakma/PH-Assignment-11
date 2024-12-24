@@ -14,7 +14,7 @@ const MyPost = () => {
 
   useEffect(() => {
     fetchMyPosts();
-  }, [user]);
+  }, [user,axiosSecure]);
 
   const fetchMyPosts = async () => {
     try {
@@ -77,7 +77,7 @@ const MyPost = () => {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden border  md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 ">
-                <thead className="">
+                <thead className="bg-[#EF4C53] text-white">
                   <tr>
                     <th className="py-3.5 px-4 text-sm font-normal text-left ">
                       Title

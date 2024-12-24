@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const AllVolunteer = () => {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
-  const [viewMode, setViewMode] = useState("grid"); // grid or table
+  const [viewMode, setViewMode] = useState("grid");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -63,7 +63,6 @@ const AllVolunteer = () => {
   return (
     <div className="min-h-screen py-8 transition-colors duration-300">
       <div className="mb-6 flex flex-wrap items-center justify-between w-11/12 md:w-8/12 mx-auto">
-        {/* Search Section */}
         <div className="flex-grow flex items-center gap-1">
           <input
             type="text"
@@ -81,24 +80,26 @@ const AllVolunteer = () => {
           </button>
         </div>
 
-        {/* Menu Icons */}
         <div className="flex gap-2 mt-4 md:mt-0 justify-end md:justify-start">
           <button
             onClick={() => setViewMode("grid")}
-            className={`p-2 rounded-lg ${viewMode === "grid" ? "bg-gray-200" : ""}`}
+            className={`p-2 rounded-lg ${
+              viewMode === "grid" ? "bg-gray-200" : ""
+            }`}
           >
             <CgMenuGridO className="text-xl md:text-3xl text-blue-500" />
           </button>
           <button
             onClick={() => setViewMode("table")}
-            className={`p-2 rounded-lg ${viewMode === "table" ? "bg-gray-200" : ""}`}
+            className={`p-2 rounded-lg ${
+              viewMode === "table" ? "bg-gray-200" : ""
+            }`}
           >
             <GiHamburgerMenu className="text-xl md:text-3xl text-blue-500" />
           </button>
         </div>
       </div>
 
-      {/* Grid View */}
       {viewMode === "grid" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-10/12 mx-auto">
           {posts.map((post) => (
@@ -149,62 +150,74 @@ const AllVolunteer = () => {
         </div>
       )}
 
-    {/* Table View */}
-{viewMode === "table" && (
-  <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-      <div className="overflow-hidden border md:rounded-lg">
-        <table className="min-w-full divide-y table-auto">
-          <thead className="bg-[#EF4C53] text-white">
-            <tr>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Title</th>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Category</th>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Location</th>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Deadline</th>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Volunteers Needed</th>
-              <th className="px-4 py-3 text-sm font-semibold text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            {posts.map((post) => (
-              <tr key={post._id}>
-                <td className="px-4 py-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    {post.photo && (
-                      <img
-                        src={post.photo}
-                        alt={post.title}
-                        className="w-10 h-10 object-cover rounded"
-                      />
-                    )}
-                    <span className="font-medium">{post.title}</span>
-                  </div>
-                </td>
-                <td className="px-4 py-4 text-sm">{post.category}</td>
-                <td className="px-4 py-4 text-sm">{post.location}</td>
-                <td className="px-4 py-4 text-sm ">
-                  {new Date(post.deadLine).toLocaleDateString()}
-                </td>
-                <td className="px-4 py-4 text-sm ">
-                  {post.noofvolunteer}
-                </td>
-                <td className="px-4 py-4 text-sm">
-                  <button
-                    onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-                    className="text-red-500"
-                  >
-                    See more
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-)}
-
+      {viewMode === "table" && (
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden border md:rounded-lg">
+              <table className="min-w-full divide-y table-auto">
+                <thead className="bg-[#EF4C53] text-white">
+                  <tr>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Title
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Category
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Location
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Deadline
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Volunteers Needed
+                    </th>
+                    <th className="px-4 py-3 text-sm font-semibold text-left">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {posts.map((post) => (
+                    <tr key={post._id}>
+                      <td className="px-4 py-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          {post.photo && (
+                            <img
+                              src={post.photo}
+                              alt={post.title}
+                              className="w-10 h-10 object-cover rounded"
+                            />
+                          )}
+                          <span className="font-medium">{post.title}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4 text-sm">{post.category}</td>
+                      <td className="px-4 py-4 text-sm">{post.location}</td>
+                      <td className="px-4 py-4 text-sm ">
+                        {new Date(post.deadLine).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-4 text-sm ">
+                        {post.noofvolunteer}
+                      </td>
+                      <td className="px-4 py-4 text-sm">
+                        <button
+                          onClick={() =>
+                            navigate(`/VoulenteerDetails/${post._id}`)
+                          }
+                          className="text-red-500"
+                        >
+                          See more
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

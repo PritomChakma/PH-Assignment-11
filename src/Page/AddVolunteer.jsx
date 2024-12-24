@@ -5,8 +5,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
-
+import useAxiosSecure from "../hook/useAxiosSecure";
 const AddVolunteer = () => {
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const { user } = useContext(AuthContex);
   const [startDate, setStartDate] = useState(new Date());
@@ -34,13 +35,14 @@ const AddVolunteer = () => {
       description,
       location,
       photo,
+      
       noofvolunteer,
     };
 
     console.log(Data);
     try {
       // Make a POST request
-      await axios.post(`${import.meta.env.VITE_API_URL}/add-post`, Data);
+      await axiosSecure.post(`/add-post`, Data);
       form.reset();
       toast.success("Data Added Successfully!");
       navigate("/myPost");
@@ -92,7 +94,7 @@ const AddVolunteer = () => {
           </div>
   
           <div>
-            <label className="text-gray-700 dark:text-gray-200">Organizer Name</label>
+            <label className="">Organizer Name</label>
             <input
               id="organizer_name"
               type="text"
@@ -110,7 +112,7 @@ const AddVolunteer = () => {
             <select
               name="category"
               id="category"
-              className="border-2 p-2 rounded-md w-full  dark:border-gray-700"
+              className="border-2 p-2 rounded-md w-full "
             >
               <option value="healthcare">Healthcare</option>
               <option value="education">Education</option>

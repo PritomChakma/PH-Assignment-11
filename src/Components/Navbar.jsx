@@ -10,16 +10,14 @@ import {
 import { RiGitPullRequestLine } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../Provider/AuthProvider";
-import logo from "../assets/Logo-removebg-preview.png"
+import logo from "../assets/Logo-removebg-preview.png";
+
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, signOutUser } = useContext(AuthContex);
   const dropdownRef = useRef(null);
 
-
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "light"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const handleToggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -27,11 +25,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -53,31 +49,29 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOutUser()
-      .then(() => {
-   
-      })
+      .then(() => {})
       .catch((error) => {
         console.error("Sign out error:", error.message);
       });
   };
 
   return (
-    <div className="navbar bg-base-100 ">
+    <div className="navbar bg-gray-800 text-white h-20">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl ">
-        <img className="h-5 w-5 md:h-10 md:w-10" src={logo} alt="" />
-          <p>Voluntero</p>
+        <Link to="/" className="btn btn-ghost text-xl flex items-center">
+          <img className="h-5 w-5 md:h-10 md:w-10" src={logo} alt="Logo" />
+          <p className="md:text-2xl">Voluntero</p>
         </Link>
       </div>
       <div className="flex-none md:gap-3 items-center">
         <div className="flex gap-1 md:gap-3">
-          <NavLink to="/" className="dark:text-gray-200">
+          <NavLink to="/" className="hover:text-gray-400">
             Home
           </NavLink>
-          <NavLink to="/allVolunteer" className="dark:text-gray-200">
+          <NavLink to="/allVolunteer" className="hover:text-gray-400">
             Volunteer
           </NavLink>
-          <NavLink to="" className="dark:text-gray-200">
+          <NavLink to="" className="hover:text-gray-400">
             About
           </NavLink>
         </div>
@@ -102,59 +96,81 @@ const Navbar = () => {
                   style={{ borderColor: "#EF4C53" }}
                 />
               ) : (
-                <i className="fa-solid fa-user text-2xl dark:text-white"></i>
+                <i className="fa-solid fa-user text-2xl text-white"></i>
               )}
             </div>
           </div>
           {isDropdownOpen && (
             <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-800 dark:text-gray-200 rounded-box z-10 mt-3 w-52 px-2 space-y-3 shadow"
-            >
-              <li>
-                <Link to="/addVolunteer">
-                  <MdOutlineAddToPhotos className="text-lg" /> Add Volunteer
-                  Post
-                </Link>
-              </li>
-              <li>
-                <Link to="/myPost">
-                  <MdPostAdd className="text-lg" /> My Volunteer Posts
-                </Link>
-              </li>
-              <li>
-                <Link to="/myRequest">
-                  <MdOutlineManageAccounts className="text-lg" /> Manage My
-                  Posts
-                </Link>
-              </li>
-              <li>
-                <Link to="/vouleenteerRequest">
-                  <RiGitPullRequestLine className="text-lg" /> Volunteer Request
-                </Link>
-              </li>
-              <li>
-                <button
-                  className="flex items-center gap-2"
-                  onClick={handleToggleTheme}
+            tabIndex={0}
+            className={`menu menu-sm dropdown-content bg-gray-800 text-white rounded-lg shadow-lg z-10 mt-3 w-60 px-4 py-3 space-y-2`}
+          >
+            <li className="rounded-md">
+              <NavLink
+                to="/addVolunteer"
+                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+              >
+                <MdOutlineAddToPhotos className="text-lg text-red-400" />
+                Add Volunteer Post
+              </NavLink>
+            </li>
+            <li className="rounded-md">
+              <NavLink
+                to="/myPost"
+                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+              >
+                <MdPostAdd className="text-lg text-yellow-400" />
+                My Volunteer Posts
+              </NavLink>
+            </li>
+            <li className="rounded-md">
+              <NavLink
+                to="/myRequest"
+                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+              >
+                <MdOutlineManageAccounts className="text-lg text-blue-400" />
+                Manage My Posts
+              </NavLink>
+            </li>
+            <li className="rounded-md">
+              <NavLink
+                to="/vouleenteerRequest"
+                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+              >
+                <RiGitPullRequestLine className="text-lg text-green-400" />
+                Volunteer Request
+              </NavLink>
+            </li>
+            <li className="rounded-md">
+              <button
+                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                onClick={handleToggleTheme}
+              >
+                <CgDarkMode className="text-lg" />
+                {theme === "light" ? "Dark Mode" : "Light Mode"}
+              </button>
+            </li>
+            <li className="rounded-md">
+              {user ? (
+                <NavLink
+                  to="/signin"
+                  onClick={handleSignOut}
+                  className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
                 >
-                  <CgDarkMode className="text-lg" />
-                  {theme === "light" ? "Dark Mode" : "Light Mode"}
-                </button>
-              </li>
-
-              <li>
-                {user ? (
-                  <NavLink to="/signin" onClick={handleSignOut}>
-                    <BiLogOut className="text-lg" /> Log Out
-                  </NavLink>
-                ) : (
-                  <NavLink to="/signin">
-                    <GrLogin className="text-lg" /> Signin
-                  </NavLink>
-                )}
-              </li>
-            </ul>
+                  <BiLogOut className="text-lg text-red-400" />
+                  Log Out
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/signin"
+                  className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                >
+                  <GrLogin className="text-lg text-green-400" />
+                  Sign In
+                </NavLink>
+              )}
+            </li>
+          </ul>
           )}
         </div>
       </div>

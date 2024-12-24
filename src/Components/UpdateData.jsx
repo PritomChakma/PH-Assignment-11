@@ -28,7 +28,7 @@ const UpdateData = () => {
     };
 
     fetchPosts();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
