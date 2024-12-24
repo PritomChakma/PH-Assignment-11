@@ -62,20 +62,23 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 dark:bg-gray-900 dark:text-gray-200">
+    <div className="navbar bg-base-100 ">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl dark:text-white">
-        <img className="h-10 w-10" src={logo} alt="" />
+        <Link to="/" className="btn btn-ghost text-xl ">
+        <img className="h-5 w-5 md:h-10 md:w-10" src={logo} alt="" />
           <p>Voluntero</p>
         </Link>
       </div>
       <div className="flex-none md:gap-3 items-center">
-        <div className="flex gap-3">
+        <div className="flex gap-1 md:gap-3">
           <NavLink to="/" className="dark:text-gray-200">
             Home
           </NavLink>
           <NavLink to="/allVolunteer" className="dark:text-gray-200">
             Volunteer
+          </NavLink>
+          <NavLink to="" className="dark:text-gray-200">
+            About
           </NavLink>
         </div>
 

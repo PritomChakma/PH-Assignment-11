@@ -16,9 +16,7 @@ const VolunteerDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axiosSecure.get(
-          `/update/${id}`
-        );
+        const response = await axiosSecure.get(`/update/${id}`);
         setPost(response.data);
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -26,7 +24,7 @@ const VolunteerDetails = () => {
     };
 
     fetchPost();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,8 +47,10 @@ const VolunteerDetails = () => {
     const postId = post?._id;
     const volunteer = post?.volunteer;
 
-    if (user?.email === volunteer?.email)
-      return toast.error("Action not permitted!");
+    if (user?.email === volunteer?.email) {
+      toast.error("Action not permitted!");
+      return;
+    }
 
     const data = {
       name,
@@ -67,27 +67,23 @@ const VolunteerDetails = () => {
     };
 
     try {
-      const response = await axiosSecure.post(
-        `/add-request`,
-        data
-      );
-
-      toast.success("Request Successful!!!");
-      form.reset();
-      console.log(response.data);
-      navigate("/myRequest");
+      const response = await axiosSecure.post(`/add-request`, data);
+      if (response.status === 200) {
+        toast.success("Request Successful!!!");
+        form.reset();
+        console.log(response.data);
+        navigate("/myRequest");
+      }
     } catch (err) {
-      console.log(err);
-      toast.error(err?.response?.data || "Something went wrong");
+      console.error(err);
+      toast.error(err?.response?.data?.message || "Something went wrong");
     }
   };
 
   return (
-    <div className="min-h-screen  py-8 transition-colors duration-300">
-      <div className="w-11/12 md:w-7/12 lg:w-6/12 mx-auto  p-8 border-2 rounded-lg shadow-lg transition-colors duration-300">
-        <h1 className="text-3xl font-bold  mb-6">
-          {post.title}
-        </h1>
+    <div className="min-h-screen py-8 transition-colors duration-300">
+      <div className="w-11/12 md:w-7/12 lg:w-6/12 mx-auto p-8 border-2 rounded-lg shadow-lg transition-colors duration-300">
+        <h1 className="text-3xl font-bold mb-6">{post.title}</h1>
         {post.photo && (
           <img
             referrerPolicy="no-referrer"
@@ -96,29 +92,29 @@ const VolunteerDetails = () => {
             className="w-full h-64 object-cover rounded-lg mb-6 shadow-md"
           />
         )}
-        <p className="mb-4 ">
+        <p className="mb-4">
           <h2>
             <span className="font-bold">Category:</span> {post.category}
           </h2>
         </p>
-        <p className="mb-4 ">
+        <p className="mb-4">
           <h2>
             <span className="font-bold">Location:</span> {post.location}
           </h2>
         </p>
-        <p className="mb-4 ">
+        <p className="mb-4">
           <h2>
             <span className="font-bold">Deadline:</span>{" "}
             {new Date(post.deadLine).toLocaleDateString()}
           </h2>
         </p>
-        <p className="mb-4 ">
+        <p className="mb-4">
           <h2>
             <span className="font-bold">No. of Volunteers Needed:</span>{" "}
             {post.noofvolunteer}
           </h2>
         </p>
-        <p className="mb-4 ">
+        <p className="mb-4">
           <h2>
             <span className="font-bold">Description:</span> {post.description}
           </h2>
@@ -143,32 +139,26 @@ const VolunteerDetails = () => {
       <div className="modal">
         <form
           onSubmit={handleSubmit}
-          className="modal-box rounded-lg  transition-colors duration-300"
+          className="modal-box rounded-lg transition-colors duration-300"
         >
-          <h3 className="text-2xl font-bold ">
-            Volunteer Request
-          </h3>
+          <h3 className="text-2xl font-bold">Volunteer Request</h3>
 
           <div className="space-y-4">
             <div>
-              <label className="block font-semibold ">
-                Title:
-              </label>
+              <label className="block font-semibold">Title:</label>
               <input
                 name="title"
                 type="text"
                 defaultValue={post.title}
                 readOnly
-                className="w-full  rounded-md p-2 shadow-sm focus:outline-none border-2"
+                className="w-full rounded-md p-2 shadow-sm focus:outline-none border-2"
               />
             </div>
             <div>
-              <label className="block font-semibold ">
-                Suggestion:
-              </label>
+              <label className="block font-semibold">Suggestion:</label>
               <textarea
                 name="suggestion"
-                className="w-full  rounded-md p-2 shadow-sm focus:outline-none border-2 h-20"
+                className="w-full rounded-md p-2 shadow-sm focus:outline-none border-2 h-20"
                 placeholder="Write your suggestion here..."
               ></textarea>
             </div>
@@ -177,12 +167,11 @@ const VolunteerDetails = () => {
           <div className="modal-action flex items-center justify-between">
             <label
               htmlFor="my_modal_6"
-              className="btn  rounded-md hover:bg-gray-600"
+              className="btn rounded-md hover:bg-gray-600"
             >
               Cancel
             </label>
             <button
-            
               type="submit"
               className="btn bg-green-600 text-white rounded-md hover:bg-green-700"
             >

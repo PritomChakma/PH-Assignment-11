@@ -35,7 +35,7 @@ const VolunteerNeedsNow = () => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className="rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            className="rounded-lg shadow-lg border  hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             {post.photo && (
               <img
@@ -57,20 +57,20 @@ const VolunteerNeedsNow = () => {
                 </p>
                 <p>
                   Deadline:{" "}
-                  <span className="font-medium text-red-500 dark:text-red-400">
+                  <span className="font-medium text-red-500 ">
                     {new Date(post.deadLine).toLocaleDateString()}
                   </span>
                 </p>
                 <p>
                   Volunteers Needed:{" "}
-                  <span className="font-medium text-blue-500 dark:text-blue-400">
+                  <span className="font-medium text-blue-500 ">
                     {post.noofvolunteer}
                   </span>
                 </p>
               </div>
               <button
                 onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-md font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-200"
+                className="w-full btn text-white bg-[#EF4C53] transition-all duration-200"
               >
                 View Details
               </button>
