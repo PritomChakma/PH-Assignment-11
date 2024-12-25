@@ -1,95 +1,162 @@
-import React from "react";
-
+import team1 from "../assets/team-1.jpg";
+import team2 from "../assets/team-2.jpg";
+import team3 from "../assets/team-3.jpg";
+import team4 from "../assets/team-4.jpg";
 const About = () => {
   return (
-    <div>
-      <section className="py-6 dark:bg-gray-100 dark:text-gray-900">
-        <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
-          <div className="py-6 md:py-0 md:px-6">
-            <h1 className="text-4xl font-bold">Voluntero</h1>
-            <p className="pt-2 pb-4">
-              Fill in the form to start a conversation
+    <div className="bg-gray-100 text-gray-900 py-12">
+      <div className="container mx-auto px-6 lg:px-20">
+        <h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
+        <div className="space-y-12">
+          <section className="text-center">
+            <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
+            <p className="text-lg">
+              At <span className="font-bold">Voluntero</span>, our mission is to
+              connect passionate individuals with opportunities to make a
+              positive impact in their communities. We strive to create a world
+              where every act of kindness contributes to a better future.
             </p>
-            <div className="space-y-4">
-              <p className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5 mr-2 sm:mr-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span>Sunnyville, CA 94000, United States</span>
-              </p>
-              <p className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5 mr-2 sm:mr-6"
-                >
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
-                </svg>
-                <span>123456789</span>
-              </p>
-              <p className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5 mr-2 sm:mr-6"
-                >
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                </svg>
-                <span>contact@business.com</span>
-              </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-semibold mb-6 text-center">
+              Why Choose Us?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-6 bg-white rounded shadow-md">
+                <h3 className="text-xl font-semibold mb-2">
+                  Volunteer Matching
+                </h3>
+                <p>
+                  We connect volunteers with opportunities based on their skills
+                  and interests, making it easy to find meaningful ways to
+                  contribute.
+                </p>
+              </div>
+              <div className="p-6 bg-white rounded shadow-md">
+                <h3 className="text-xl font-semibold mb-2">Event Management</h3>
+                <p>
+                  Manage, promote, and join volunteer events seamlessly through
+                  our platform.
+                </p>
+              </div>
+              <div className="p-6 bg-white rounded shadow-md">
+                <h3 className="text-xl font-semibold mb-2">Impact Tracking</h3>
+                <p>
+                  Track your volunteer hours and contributions to measure the
+                  difference you’ve made.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <h2 className="text-3xl font-semibold mb-6 text-center">
+            Meet Our Team
+          </h2>
+          <div className="grid  md:grid-cols-4 gap-5 w-11/12 mx-auto my-5">
+            <div className="max-w-sm rounded-lg shadow-lg overflow-hidden  hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+              <img
+                src={team1}
+                alt="Team Member"
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-6">
+                <h1 className="text-2xl font-semibold ">Jonathan Doe</h1>
+                <p className="text-sm  mt-2">
+                  <span className="font-medium">Email:</span>
+                  jonathan.doe@example.com
+                </p>
+                <div className="flex space-x-4 mt-4">
+                  <i className="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                  <i className="fa-brands fa-instagram text-pink-600 text-lg"></i>
+                  <i className="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                  <i className="fa-brands fa-twitter text-blue-400 text-lg"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-sm rounded-lg shadow-lg overflow-hidden hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+              <img
+                src={team2}
+                alt="Team Member"
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-6">
+                <h1 className="text-2xl font-semibold ">George Bell</h1>
+                <p className="text-sm  mt-2">
+                  <span className="font-medium">Email:</span>{" "}
+                  George.doe@example.com
+                </p>
+                <div className="flex space-x-4 mt-4">
+                  <i className="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                  <i className="fa-brands fa-instagram text-pink-600 text-lg"></i>
+                  <i className="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                  <i className="fa-brands fa-twitter text-blue-400 text-lg"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-sm rounded-lg shadow-lg overflow-hidden hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+              <img
+                src={team3}
+                alt="Team Member"
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-6">
+                <h1 className="text-2xl font-semibold ">Laura Fenty</h1>
+                <p className="text-sm  mt-2">
+                  <span className="font-medium">Email:</span>{" "}
+                  Laura.doe@example.com
+                </p>
+                <div className="flex space-x-4 mt-4">
+                  <i className="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                  <i className="fa-brands fa-instagram text-pink-600 text-lg"></i>
+                  <i className="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                  <i className="fa-brands fa-twitter text-blue-400 text-lg"></i>
+                </div>
+              </div>
+            </div>
+
+            <div className="max-w-sm rounded-lg shadow-lg overflow-hidden hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+              <img
+                src={team4}
+                alt="Team Member"
+                className="w-full h-56 object-cover"
+              />
+              <div className="p-6">
+                <h1 className="text-2xl font-semibold ">Cameron Poll</h1>
+                <p className="text-sm  mt-2">
+                  <span className="font-medium">Email:</span>{" "}
+                  Cameron.doe@example.com
+                </p>
+                <div className="flex space-x-4 mt-4">
+                  <i className="fa-brands fa-facebook-f text-blue-600 text-lg"></i>
+                  <i className="fa-brands fa-instagram text-pink-600 text-lg"></i>
+                  <i className="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                  <i className="fa-brands fa-twitter text-blue-400 text-lg"></i>
+                </div>
+              </div>
             </div>
           </div>
-          <form
-            noValidate=""
-            className="flex flex-col py-6 space-y-6 md:py-0 md:px-6"
-          >
-            <label className="block ">
-              <span className="mb-1">Full name</span>
-              <input
-                type="text"
-                placeholder="Enter Your Full Name"
-                className="block w-full rounded-md shadow-sm f  border-2 "
-                fdprocessedid="a9ibmj"
-              />
-            </label>
-            <label className="block">
-              <span className="mb-1">Email address</span>
-              <input
-                type="email"
-                placeholder="Example@gmail.com"
-                className="block w-full rounded-md shadow-sm   border-2"
-                fdprocessedid="k1i0v"
-              />
-            </label>
-            <label className="block">
-              <span className="mb-1">Message</span>
-              <textarea
-                rows="3"
-                className="block w-full rounded-md  border-2"
-              ></textarea>
-            </label>
-            <button
-              type="button"
-              className="border-2 self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75"
-              fdprocessedid="rph1y"
-            >
-              Submit
-            </button>
-          </form>
+
+          <section>
+            <h2 className="text-3xl font-semibold mb-6 text-center">
+              Success Stories
+            </h2>
+            <div className="space-y-4">
+              <h2 className="p-4   bg-white">
+                "Voluntero made it so easy to find an opportunity that matched
+                my skills. I’ve loved contributing to my community and seeing
+                the impact firsthand!" – Jane Doe
+              </h2>
+              <h2 className="p-4   bg-white">
+                "The platform is intuitive and has helped our organization
+                connect with amazing volunteers!" – Community Org
+              </h2>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

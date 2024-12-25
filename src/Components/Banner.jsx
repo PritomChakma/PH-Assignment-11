@@ -14,7 +14,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const Banner = () => {
   return (
-    <div className="md:w-11/12 mx-auto">
+    <div className="mx-auto">
       <div className=" ">
         <Swiper
           spaceBetween={30}

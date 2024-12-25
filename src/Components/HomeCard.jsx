@@ -33,7 +33,7 @@ const VolunteerNeedsNow = () => {
 
   return (
     <div className="min-h-screen py-8 transition-colors duration-300">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-11/12 md:w-9/12 mx-auto mt-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:w-11/12 mx-auto mt-10">
       {posts.map((post) => (
         <div
           key={post._id}
