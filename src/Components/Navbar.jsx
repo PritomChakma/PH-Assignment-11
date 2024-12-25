@@ -65,15 +65,9 @@ const Navbar = () => {
       </div>
       <div className="flex-none md:gap-3 items-center">
         <div className="flex gap-1 md:gap-3">
-          <NavLink to="/" className="hover:text-gray-400">
-            Home
-          </NavLink>
-          <NavLink to="/allVolunteer" className="hover:text-gray-400">
-            Volunteer
-          </NavLink>
-          <NavLink to="" className="hover:text-gray-400">
-            About
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/allVolunteer">Volunteer</NavLink>
+          <NavLink to="/about">About</NavLink>
         </div>
 
         <div className="dropdown dropdown-end relative" ref={dropdownRef}>
@@ -102,75 +96,75 @@ const Navbar = () => {
           </div>
           {isDropdownOpen && (
             <ul
-            tabIndex={0}
-            className={`menu menu-sm dropdown-content bg-gray-800 text-white rounded-lg shadow-lg z-10 mt-3 w-60 px-4 py-3 space-y-2`}
-          >
-            <li className="rounded-md">
-              <NavLink
-                to="/addVolunteer"
-                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
-              >
-                <MdOutlineAddToPhotos className="text-lg text-red-400" />
-                Add Volunteer Post
-              </NavLink>
-            </li>
-            <li className="rounded-md">
-              <NavLink
-                to="/myPost"
-                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
-              >
-                <MdPostAdd className="text-lg text-yellow-400" />
-                My Volunteer Posts
-              </NavLink>
-            </li>
-            <li className="rounded-md">
-              <NavLink
-                to="/myRequest"
-                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
-              >
-                <MdOutlineManageAccounts className="text-lg text-blue-400" />
-                Manage My Posts
-              </NavLink>
-            </li>
-            <li className="rounded-md">
-              <NavLink
-                to="/vouleenteerRequest"
-                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
-              >
-                <RiGitPullRequestLine className="text-lg text-green-400" />
-                Volunteer Request
-              </NavLink>
-            </li>
-            <li className="rounded-md">
-              <button
-                className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
-                onClick={handleToggleTheme}
-              >
-                <CgDarkMode className="text-lg text-white" />
-                {theme === "light" ? "Dark Mode" : "Light Mode"}
-              </button>
-            </li>
-            <li className="rounded-md">
-              {user ? (
+              tabIndex={0}
+              className={`menu menu-sm dropdown-content bg-gray-800 text-white rounded-lg shadow-lg z-10 mt-3 w-60 px-4 py-3 space-y-2`}
+            >
+              <li className="rounded-md">
                 <NavLink
-                  to="/signin"
-                  onClick={handleSignOut}
+                  to="/addVolunteer"
                   className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
                 >
-                  <BiLogOut className="text-lg text-red-400" />
-                  Log Out
+                  <MdOutlineAddToPhotos className="text-lg text-red-400" />
+                  Add Volunteer Post
                 </NavLink>
-              ) : (
+              </li>
+              <li className="rounded-md">
                 <NavLink
-                  to="/signin"
+                  to="/myPost"
                   className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
                 >
-                  <GrLogin className="text-lg text-green-400" />
-                  Sign In
+                  <MdPostAdd className="text-lg text-yellow-400" />
+                  My Volunteer Posts
                 </NavLink>
-              )}
-            </li>
-          </ul>
+              </li>
+              <li className="rounded-md">
+                <NavLink
+                  to="/myRequest"
+                  className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                >
+                  <MdOutlineManageAccounts className="text-lg text-blue-400" />
+                  Manage My Posts
+                </NavLink>
+              </li>
+              <li className="rounded-md">
+                <NavLink
+                  to="/vouleenteerRequest"
+                  className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                >
+                  <RiGitPullRequestLine className="text-lg text-green-400" />
+                  Volunteer Request
+                </NavLink>
+              </li>
+              <li className="rounded-md">
+                <button
+                  className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                  onClick={handleToggleTheme}
+                >
+                  <CgDarkMode className="text-lg text-white" />
+                  {theme === "light" ? "Dark Mode" : "Light Mode"}
+                </button>
+              </li>
+              <li className="rounded-md">
+                {user ? (
+                  <NavLink
+                    to="/signin"
+                    onClick={handleSignOut}
+                    className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                  >
+                    <BiLogOut className="text-lg text-red-400" />
+                    Log Out
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to="/signin"
+                    className="flex items-center gap-3 px-2 py-2 text-white hover:bg-gray-700"
+                  >
+                    <GrLogin className="text-lg text-green-400" />
+                    Sign In
+                  </NavLink>
+                )}
+              </li>
+            </ul>
           )}
         </div>
       </div>

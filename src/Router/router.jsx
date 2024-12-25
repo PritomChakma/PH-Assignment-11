@@ -3,6 +3,7 @@ import ErrorPage from "../Components/ErrorPage";
 import UpdateData from "../Components/UpdateData";
 import VoulenteerDetails from "../Components/VoulenteerDetails";
 import MainLayout from "../Layout/MainLayout";
+import About from "../Page/About";
 import AddVolunteer from "../Page/AddVolunteer";
 import AllVolunteer from "../Page/AllVouleenter";
 import Home from "../Page/Home";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/allVolunteer",
         element: <AllVolunteer></AllVolunteer>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/addVolunteer",

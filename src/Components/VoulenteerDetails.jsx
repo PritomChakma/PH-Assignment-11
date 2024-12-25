@@ -81,68 +81,57 @@ const VolunteerDetails = () => {
 
   return (
     <div className="min-h-screen py-8 transition-colors duration-300">
-      <div className="w-11/12 md:w-7/12 lg:w-6/12 mx-auto p-8 border-2 rounded-lg shadow-lg transition-colors duration-300">
-        <h1 className="text-3xl font-bold mb-6">{post.title}</h1>
+      <div className="w-full md:w-9/12 lg:w-8/12 xl:w-7/12 mx-auto p-6 md:p-8  border-2 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
+
         {post.photo && (
           <img
             referrerPolicy="no-referrer"
             src={post.photo}
             alt={post.title}
-            className="w-full h-64 object-cover rounded-lg mb-6 shadow-md"
+            className="w-full h-64 object-cover rounded-lg mb-6 shadow-md transition-all duration-300 ease-in-out hover:scale-105"
           />
         )}
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Category:</span> {post.category}
-          </h2>
-        </p>
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Location:</span> {post.location}
-          </h2>
-        </p>
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Deadline:</span>{" "}
+
+        <div className="space-y-4">
+          <div className="text-lg ">
+            <span className="font-semibold ">Category:</span> {post.category}
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">Location:</span> {post.location}
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">Deadline:</span>{" "}
             {new Date(post.deadLine).toLocaleDateString()}
-          </h2>
-        </p>
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">No. of Volunteers Needed:</span>{" "}
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">No. of Volunteers Needed:</span>{" "}
             {post.noofvolunteer}
-          </h2>
-        </p>
-
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Vouleenter Name:</span>
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">Volunteer Name:</span>{" "}
             {user.displayName}
-          </h2>
-        </p>
-
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Vouleenter Email:</span>
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">Volunteer Email:</span>{" "}
             {user.email}
-          </h2>
-        </p>
+          </div>
+          <div className="text-lg ">
+            <span className="font-semibold ">Description:</span>{" "}
+            {post.description}
+          </div>
+        </div>
 
-        <p className="mb-4">
-          <h2>
-            <span className="font-bold">Description:</span> {post.description}
-          </h2>
-        </p>
-        <div className="flex items-center gap-4 mt-6">
+        <div className="flex items-center gap-4 mt-8">
           <label
             htmlFor="my_modal_6"
-            className="px-6 py-3 bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 transition cursor-pointer"
+            className="px-6 py-3 bg-green-600  rounded-md shadow-md text-white transition duration-300 cursor-pointer w-full sm:w-auto text-center"
           >
             Be a Volunteer
           </label>
           <button
             onClick={() => navigate("/allVolunteer")}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 text-white rounded-md shadow-md  transition duration-300 w-full sm:w-auto text-center"
           >
             Go Back
           </button>

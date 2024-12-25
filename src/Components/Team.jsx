@@ -4,7 +4,7 @@ import team3 from "../assets/team-3.jpg";
 import team4 from "../assets/team-4.jpg";
 const Team = () => {
   return (
-    <div className="grid  md:grid-cols-4 gap-5 md:w-11/12 mx-auto my-5">
+    <div className="grid  md:grid-cols-4 gap-5 w-11/12 mx-auto my-5">
       {/* team 1 */}
       <div className="max-w-sm rounded-lg shadow-lg overflow-hidden  hover:shadow-lg transform hover:scale-105 transition-all duration-300">
         <img
