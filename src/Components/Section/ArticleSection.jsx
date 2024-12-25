@@ -1,7 +1,7 @@
 import img from "../../assets/img1.jpeg";
 const ArticleSection = () => {
   return (
-    <div className="w-full mx-auto px-4 py-10">
+    <div className="w-11/12  mx-auto px-4 py-10">
       <div className="md:flex md:items-center md:space-x-8 space-y-8 md:space-y-0">
         <div className="md:w-1/2">
           <img

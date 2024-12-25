@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const VolunteerNeedsNow = () => {
+  const axiosSecure = useAxiosSecure()
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ const VolunteerNeedsNow = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
+        const response = await axiosSecure.get(
           `${import.meta.env.VITE_API_URL}/all-volunteer`
         );
 

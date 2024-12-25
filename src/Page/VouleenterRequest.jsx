@@ -18,7 +18,7 @@ const VolunteerRequest = () => {
   const fetchMyRequest = async () => {
     try {
       const { data } = await axiosSecure.get(
-        `/vouleenter-request/${user?.email}?volunteer=true`
+        `/vouleenter-request/${user?.email}?volunteer=true`,
       );
       setRequest(data);
     } catch (error) {
