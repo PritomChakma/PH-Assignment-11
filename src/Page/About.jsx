@@ -4,7 +4,7 @@ import team3 from "../assets/team-3.jpg";
 import team4 from "../assets/team-4.jpg";
 const About = () => {
   return (
-    <div className="bg-gray-100 text-gray-900 py-12">
+    <div className=" py-12">
       <div className="container mx-auto px-6 lg:px-20">
         <h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
         <div className="space-y-12">
@@ -23,7 +23,7 @@ const About = () => {
               Why Choose Us?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-6 bg-white rounded shadow-md">
+              <div className="p-6  rounded shadow-md">
                 <h3 className="text-xl font-semibold mb-2">
                   Volunteer Matching
                 </h3>
@@ -33,14 +33,14 @@ const About = () => {
                   contribute.
                 </p>
               </div>
-              <div className="p-6 bg-white rounded shadow-md">
+              <div className="p-6  rounded shadow-md">
                 <h3 className="text-xl font-semibold mb-2">Event Management</h3>
                 <p>
                   Manage, promote, and join volunteer events seamlessly through
                   our platform.
                 </p>
               </div>
-              <div className="p-6 bg-white rounded shadow-md">
+              <div className="p-6  rounded shadow-md">
                 <h3 className="text-xl font-semibold mb-2">Impact Tracking</h3>
                 <p>
                   Track your volunteer hours and contributions to measure the
@@ -144,12 +144,12 @@ const About = () => {
               Success Stories
             </h2>
             <div className="space-y-4">
-              <h2 className="p-4   bg-white">
+              <h2 className="p-4 ">
                 "Voluntero made it so easy to find an opportunity that matched
                 my skills. I’ve loved contributing to my community and seeing
                 the impact firsthand!" – Jane Doe
               </h2>
-              <h2 className="p-4   bg-white">
+              <h2 className="p-4 ">
                 "The platform is intuitive and has helped our organization
                 connect with amazing volunteers!" – Community Org
               </h2>
