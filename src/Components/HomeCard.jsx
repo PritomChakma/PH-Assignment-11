@@ -70,7 +70,7 @@ const VolunteerNeedsNow = () => {
             </div>
             <button
               onClick={() => navigate(`/VoulenteerDetails/${post._id}`)}
-               className="w-full btn text-white bg-[#2c3e50] hover:bg-[#d8434a] transition-all duration-150 py-1 text-sm"
+               className="w-full btn text-white hover:bg-[#2c3e50] bg-[#d8434a] transition-all duration-150 py-1 text-sm"
             >
               View Details
             </button>
