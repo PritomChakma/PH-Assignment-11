@@ -56,7 +56,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-gray-800 text-white h-20">
+    <div className="navbar bg-gray-800 text-white h-20 sticky top-0 z-10">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-xl flex items-center">
           <img className="h-5 w-5 md:h-10 md:w-10" src={logo} alt="Logo" />

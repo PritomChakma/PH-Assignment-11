@@ -5,7 +5,7 @@ import Team from "../Components/Team";
 
 const Home = () => {
   return (
-    <div>
+    <div >
       <Banner></Banner>
       <HomeCard></HomeCard>
       <ArticleSection></ArticleSection>
